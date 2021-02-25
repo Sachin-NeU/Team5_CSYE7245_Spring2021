@@ -7,17 +7,17 @@ Apache Kafka was originally developed by LinkedIn, and was subsequently open-sou
 
 
 #### USE CASES OF KAFKA
-######Kafka Messaging
+####Kafka Messaging
 Kafka is a distributed large-scale publish-subscribe message processing applications.
-######Website Activity Tracking
+####Website Activity Tracking
 To be able to rebuild a user activity tracking pipeline as a set of real-time publish-subscribe feeds, it is the original Use Case for Kafka.
-######Kafka Metrics
+####Kafka Metrics
 For operational monitoring data, to produce centralized feeds of operational data, it includes aggregating statistics from distributed applications.
-######Kafka Log Aggregation
+####Kafka Log Aggregation
 In order to collect logs from multiple services and make them available in a standard format to multiple consumers, we can use Kafka across an organization.
-######Stream Processing
+####Stream Processing
 Many users of Kafka process data in processing pipelines consisting of multiple stages, where raw input data is consumed from Kafka topics and then aggregated, enriched, or otherwise transformed into new topics for further consumption or follow-up processing.
-######Commit Log
+####Commit Log
 While it comes to a distributed system, Kafka can serve as a kind of external commit-log for it. Generally, it replicates data between nodes. Also, acts as a re-syncing mechanism for failed nodes to restore their data. The feature of log compaction in Kafka helps to support this usage.
 
 ### Getting Started
@@ -61,5 +61,3 @@ Use the `twitter-stream.py` script to fetch tweets using Twitter's API in real-t
 - Publishes these tweets to the Kafka Broker
 
 On running `consumer.py` - you should see all the published events, that are collected by the consumer. 
-
-ß
