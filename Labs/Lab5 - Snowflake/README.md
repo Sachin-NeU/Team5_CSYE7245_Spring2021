@@ -2,22 +2,21 @@ Welcome to Snowflake! This entry-level guide designed for database and data ware
 
 Free Virtual Hands-on Lab
 
-This Snowflake Guide is available as a free, instructor-led Virtual Hands on Lab. Sign up for the VHOL today.
+This Snowflake Guide is available as a free, instructor-led Virtual Hands on Lab.
 
 Prerequisites:
+- Use of the Snowflake free 30-day trial environment
+- Basic knowledge of SQL, database concepts, and objects
+- Familiarity with CSV comma-delimited files and JSON semi-structured data
 
-Use of the Snowflake free 30-day trial environment
-Basic knowledge of SQL, database concepts, and objects
-Familiarity with CSV comma-delimited files and JSON semi-structured data
 What You'll Learn:
-how to create stages, databases, tables, views, and warehouses
-how to load structured and semi-structured data
-how to query data including joins between tables
-how to clone objects
-how to undo user errors
-how to create roles and users, and grant them privileges
-how to securely and easily share data with other accounts
+- how to create stages, databases, tables, views, and warehouses
+- how to load structured and semi-structured data
+- how to query data including joins between tables
+- how to clone objects
+- how to undo user errors
+- how to create roles and users, and grant them privileges
+- how to securely and easily share data with other accounts
 
 CLAAT Document:
-
-https://docs.google.com/document/d/19HG1nMevVuWQ15Jhk5FbiODJKptg0SoU4zzRWzzj008/
+- https://docs.google.com/document/d/19HG1nMevVuWQ15Jhk5FbiODJKptg0SoU4zzRWzzj008/
