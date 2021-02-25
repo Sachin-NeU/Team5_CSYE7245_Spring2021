@@ -7,7 +7,7 @@ Apache Kafka was originally developed by LinkedIn, and was subsequently open-sou
 
 
 #### USE CASES OF KAFKA
-####Kafka Messaging
+#### Kafka Messaging
 Kafka is a distributed large-scale publish-subscribe message processing applications.
 ####Website Activity Tracking
 To be able to rebuild a user activity tracking pipeline as a set of real-time publish-subscribe feeds, it is the original Use Case for Kafka.
