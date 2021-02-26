@@ -66,3 +66,8 @@ Use the `twitter-stream.py` script to fetch tweets using Twitter's API in real-t
 - Publishes these tweets to the Kafka Broker
 
 On running `consumer.py` - you should see all the published events, that are collected by the consumer. 
+
+
+### Documentation
+
+https://docs.google.com/document/d/1fAPslOyGLYUCmp-MjQGiALSNW84U5f3AAwGo0e77lo0/edit#
