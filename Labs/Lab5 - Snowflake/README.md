@@ -19,4 +19,4 @@ What You'll Learn:
 - how to securely and easily share data with other accounts
 
 CLAAT Document:
-- https://docs.google.com/document/d/19HG1nMevVuWQ15Jhk5FbiODJKptg0SoU4zzRWzzj008/
+- https://docs.google.com/document/d/e/2PACX-1vQ_PAYqiArGzRyV-TWfD-dZMwBoS53N5Wt7HmPBnPEpBclc_gyZP0ILL5_hiSdoMXFisYdqHq7aKkbz/pub
