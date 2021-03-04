@@ -36,7 +36,7 @@ AWS Glue Studio is used for data ingestion, transformation, integration and writ
 
 Amazon QuickSight is used for query data and build visuals
 
-![](images/sevirpipeline.PNG)
+![](images/sevirpipeline.png)
 
 
 ### Usage
