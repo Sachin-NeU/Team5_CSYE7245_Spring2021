@@ -58,7 +58,7 @@ STEP 6 - You need to create a role which has permission to Glueservices and S3
 
 STEP 7 - Run the Job and see the output in the output S3 folder
 
-### AWS Lambda Function
+#### AWS Lambda Function
 
 STEP 1 - Create a lamdba function using the lambda_toivoke_gluejob.py file
 
