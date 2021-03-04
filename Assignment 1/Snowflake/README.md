@@ -34,9 +34,9 @@ The output of the pipeline is stored in the snowflake table which is then access
 ### Usage
 
 #### Snowflake Steps to load the data
-STEP 1 - You need a Snowflake account where your used
+STEP 1 - You need a Snowflake account where your username is ADMIN
 
-Comamnds to follow to create the stages and copy data to it
+Commands to follow to create the stages, tables and copy data to it
 
 STEP 2 - create or replace stage <stagename>;
 
