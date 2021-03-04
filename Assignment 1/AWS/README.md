@@ -41,6 +41,8 @@ Amazon QuickSight is used for query data and build visuals
 
 ### Usage
 
+
+
 #### AWS Glue Pipeline
 STEP 1 - You need an AWS account
 
@@ -55,6 +57,15 @@ STEP 5 - Change the input location of the Files and output location of the Files
 STEP 6 - You need to create a role which has permission to Glueservices and S3
 
 STEP 7 - Run the Job and see the output in the output S3 folder
+
+### AWS Lambda Function
+
+STEP 1 - Create a lamdba function using the lambda_toivoke_gluejob.py file
+
+STEP 2 - Create a Trigger which would call the lambda function when CATALOG.CSV file is updated
+
+STEP 3 - Create a Lamdbda role which would have access to Glue services
+
 
 #### AWS QuickSight
 
