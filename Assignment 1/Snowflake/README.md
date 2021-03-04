@@ -50,6 +50,10 @@ STEP 6 - copy into <tablename> from <stagename>;
 
 STEP 7 - Resolve all the data type issues as snowflake does not handle all the normal data types like dattime2
 
+![](images/Snowflakes_tabledata.png)
+![](images/Superset_Snowflake_ConnectionString.png)
+
+
 #### Apache Superset
 
 STEP 1 - pip install --upgrade snowflake-sqlalchemy
@@ -57,6 +61,8 @@ STEP 1 - pip install --upgrade snowflake-sqlalchemy
 STEP 2 - Use this as connection string snowflake://vivekkulkarni:*****@soa94276.US-West/SEVIRDB?role=ACCOUNTADMIN&warehouse=SEVIRDATA
 
 STEP 3 - Create New Charts and add them to the dashboards
+
+![](images/storm-events-data-2021-03-04T10-20-38.807Z.jpg)
 
 
 ### CLAAT Document
