@@ -30,6 +30,14 @@ The satellite image data is captured by 5 sensors, each sensor have a folder in 
 
 The output of the pipeline is stored in the s3 bucket for aws, the path would be mentioned in output component of Glue pipeline
 
+### Architecture
+
+AWS Glue Studio is used for data ingestion, transformation, integration and writing output back to AWS S3 buckets
+
+Amazon QuickSight is used for query data and build visuals
+
+![](images/sevirpipeline.PNG)
+
 
 ### Usage
 
