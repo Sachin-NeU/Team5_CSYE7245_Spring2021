@@ -1,4 +1,4 @@
-# Team5 CSYE7245 Spring2021
+# Business Intelligence and Analytics course
 
 This Repository will have all the assignment project and lab done by Team 5
 
