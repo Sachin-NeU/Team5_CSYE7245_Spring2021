@@ -1,6 +1,6 @@
 # Business Intelligence and Analytics course
 
-This Repository will have all the assignment project and lab done by Team 5
+This Repository will have all the assignment, project and lab done by Team 5
 
 Contributors
 
