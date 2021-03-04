@@ -52,7 +52,7 @@ STEP 3 - In the Glue service, go to the AWS Glue Studio and create a new job
 
 STEP 4 - In the job, go to the scripts and paste the script in the python folder from github
 
-STEP 5 - Change the input location of the Files and output location of the Files
+STEP 5 - Change the input location of the buckets and output location of the bucktes
 
 STEP 6 - You need to create a role which has permission to Glueservices and S3
 
