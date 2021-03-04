@@ -1,4 +1,4 @@
-# Building Data Pipeline for SEVIR Dataset using AWS
+# Building Data Pipeline for SEVIR Dataset in GCP
 
 ### INTRODUCTION
 
@@ -32,9 +32,9 @@ The output of the pipeline is stored in the s3 bucket for aws, the path would be
 
 ### Architecture
 
-AWS Glue Studio is used for data ingestion, transformation, integration and writing output back to AWS S3 buckets
+Google Dataflow is used for data ingestion, transformation, integration and writing output to Google Storage and finally to Google BigQuery.
 
-Amazon QuickSight is used for query data and build visuals
+Google BigQuery is used to query data and Google Data Studio build visualalizations
 
 ![](images/sevirpipeline.png)
 
@@ -43,37 +43,36 @@ Amazon QuickSight is used for query data and build visuals
 
 
 
-#### AWS Glue Pipeline
-STEP 1 - You need an AWS account
+#### Prerequites:
+STEP 1 - You need a GCP account
 
 STEP 2 - Download all three types of storm files and upload them to the S3 bucket
 
-STEP 3 - In the Glue service, go to the AWS Glue Studio and create a new job 
+STEP 3 - In the Google Cloud Console, on the project selector page, select or create a Google Cloud project. 
 
-STEP 4 - In the job, go to the scripts and paste the script in the python folder from github
+STEP 4 - Make sure that billing is enabled for your Cloud project.
 
-STEP 5 - Change the input location of the buckets and output location of the bucktes
+STEP 5 - Enable the BigQuery, Cloud Source Repositories and Datalab APIs
 
-STEP 6 - You need to create a role which has permission to Glueservices and S3
-
-STEP 7 - Run the Job and see the output in the output S3 folder
-
-#### AWS Lambda Function
-
-STEP 1 - Create a lamdba function using the lambda_toivoke_gluejob.py file
-
-STEP 2 - Create a Trigger which would call the lambda function when CATALOG.CSV file is updated
-
-STEP 3 - Create a Lamdbda role which would have access to Glue services
+STEP 6 - Create Bucket in Cloud Storage and Dataset in BigQuery.
 
 
-#### AWS QuickSight
+#### Python Scripts in CLoud Shell
 
-STEP 1 - Register for the AWS QuickSight Service
+STEP 1 - Open Cloud Shell and set your project.
 
-STEP 2 - Create a Dataset , using the manifest file in the quicksight folder, change the Location in the manifest file according to your S3 buckets/sevir
+STEP 2 - Create python script to connect to S3 bucket and donwload all the relevant files
 
-STEP 3 - Create New Analysis and you can create dashboards there
+STEP 3 - Create python script to load the files downloaded from S3 bucket and dump them as is to Google Cloud Storage bucket.
+
+STEP 4 - Create python script to integrate the Storm and Weather data and load the final dataset in Big Query table.
+
+
+#### BigQuery and DataFlow
+
+STEP 1 - Create queries in Big Query
+
+STEP 2 - Load the saved query in Dataflow and create visualizations
 
 
 ### CLAAT Document
