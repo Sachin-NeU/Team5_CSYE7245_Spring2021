@@ -1,0 +1,20 @@
+{
+    "fileLocations": [
+        {
+            "URIs": [
+                "s3://myfirstbucketadwait/stormoutput/"
+            ]
+        },
+        {
+            "URIPrefixes": [
+                "s3://myfirstbucketadwait/stormoutput/"
+            ]
+        }
+    ],
+    "globalUploadSettings": {
+        "format": "CSV",
+        "delimiter": ",",
+        "containsHeader": "true"
+    }
+}
+
