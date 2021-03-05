@@ -36,7 +36,7 @@ Google Dataflow is used for data ingestion, transformation, integration and writ
 
 Google BigQuery is used to query data and Google Data Studio build visualalizations
 
-![](images/sevirpipeline.png)
+![](GCP pipeline architecture.jpg)
 
 
 ### Usage
