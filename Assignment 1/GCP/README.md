@@ -52,16 +52,16 @@ STEP 3 - In the Google Cloud Console, on the project selector page, select or cr
 
 STEP 4 - Make sure that billing is enabled for your Cloud project.
 
-STEP 5 - Enable the BigQuery, Cloud Source Repositories and Datalab APIs
+STEP 5 - Enable the BigQuery, Cloud Source Repositories, Dataflow, Google Storage, Data Studio and Datalab APIs
 
 STEP 6 - Create Bucket in Cloud Storage and Dataset in BigQuery.
 
 
-#### Python Scripts in CLoud Shell
+#### Python Scripts in Cloud Shell
 
-STEP 1 - Open Cloud Shell and set your project.
+STEP 1 - Open Cloud Shell and set your project. Create a virtual environment and install all the dependencies. 
 
-STEP 2 - Create python script to connect to S3 bucket and donwload all the relevant files
+STEP 2 - Create python script to connect to S3 bucket and download all the relevant files
 
 STEP 3 - Create python script to load the files downloaded from S3 bucket and dump them as is to Google Cloud Storage bucket.
 
