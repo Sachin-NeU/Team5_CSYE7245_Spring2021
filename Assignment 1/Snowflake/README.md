@@ -26,6 +26,10 @@ Data Files: A set of HDF5 files containing events for a certain sensor type
 
 The satellite image data is captured by 5 sensors, each sensor have a folder in s3 bucket and images are saved as h5 files
 
+#### Architecture 
+
+![](images/sevir_architecture_snowflake.png)
+
 #### Output Data 
 
 The output of the pipeline is stored in the snowflake table which is then access by Apache Superset
