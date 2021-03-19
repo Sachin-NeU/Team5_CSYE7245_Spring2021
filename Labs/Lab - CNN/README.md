@@ -87,3 +87,7 @@ Login to Airflow on your browser and turn on the `CNN-Training-Pipeline` DAG fro
 
 ![airflow_run](/airflow_cnn_pipeline/img/airflow_ui.gif)
 
+
+###Clad Document
+
+https://docs.google.com/document/d/1tbpSaO3b8s1K2is9f7G_6I91MYg_-PmIPo2QzDscLas/edit
