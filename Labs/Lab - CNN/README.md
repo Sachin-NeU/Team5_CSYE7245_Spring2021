@@ -178,9 +178,6 @@ Visit 127.0.0.1:8000/docs to view API documentation.
 
 You may use the `predict.py` script for inference. Provide the path to your image and run the script.
 
-#### Citation & References
+#### Clad Document
 
-[[1] Apache Airflow](https://airflow.apache.org/) <br>
-[[2] Tuan Nguyen](https://towardsdatascience.com/getting-started-with-airflow-locally-and-remotely-d068df7fcb4) <br>
-[Hands-On Deep Learning for IoT](https://www.packtpub.com/product/hands-on-deep-learning-for-iot/9781789616132) <br>
-[GitHub: PacktPublishing/Hands-On-Deep-Learning-for-IoT](https://github.com/PacktPublishing/Hands-On-Deep-Learning-for-IoT) <br>
+https://docs.google.com/document/d/1tbpSaO3b8s1K2is9f7G_6I91MYg_-PmIPo2QzDscLas/edit
