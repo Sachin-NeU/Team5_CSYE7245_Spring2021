@@ -30,6 +30,6 @@ Start the app by running `streamlit run app.py` where `app.py` is your Python sc
 - https://www.streamlit.io/gallery
 
 
-### Clad Document
+### Claat Document
 
-https://docs.google.com/document/d/1dXFD7PjDLUcmd_0_HMYvihYS_pq2sn-dtSdKdwYxCaA/edit
+https://docs.google.com/document/d/1dXFD7PjDLUcmd_0_HMYvihYS_pq2sn-dtSdKdwYxCaA/edit?usp=sharing
