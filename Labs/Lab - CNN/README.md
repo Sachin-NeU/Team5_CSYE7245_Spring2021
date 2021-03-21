@@ -65,19 +65,6 @@ airflow scheduler
 
 Once both are running - you should be able to access the Airflow UI by visiting http://127.0.0.1:8080/home on your browser.
 
-To kill the Airflow webserver daemon:
-```
-lsof -i tcp:8080  
-```
-You should see a list of all processes that looks like this:
-```
-COMMAND   PID        USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
-Python  13280 dileepholla    6u  IPv4 0x8f7b5be5240cda23      0t0  TCP *:http-alt (LISTEN)
-Python  13325 dileepholla    6u  IPv4 0x8f7b5be5240cda23      0t0  TCP *:http-alt (LISTEN)
-Python  13362 dileepholla    6u  IPv4 0x8f7b5be5240cda23      0t0  TCP *:http-alt (LISTEN)
-Python  13401 dileepholla    6u  IPv4 0x8f7b5be5240cda23      0t0  TCP *:http-alt (LISTEN)
-Python  13431 dileepholla    6u  IPv4 0x8f7b5be5240cda23      0t0  TCP *:http-alt (LISTEN)
-```
 
 Kill the process by running `kill <PID>` - in this case, it would be `kill 13280`
 
