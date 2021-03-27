@@ -32,7 +32,7 @@ Amazon QuickSight is used for query data and build visuals
 
 #### Annotation and Training Pipeline
 
-![](images/pipeline_1.png)
+![](images/pipeline_1.PNG)
 
 STEP 1 : Upload all the call transcripts to S3 bucket 
 
@@ -58,7 +58,7 @@ STEP 10 :  Scheduled the annotation and Training Pipeline using Airflow
 
 #### Micro Services Pipeline
 
-![](images/pipeline_2.png)
+![](images/pipeline_2.PNG)
 
 STEP 1: Use docker build -t ml_deploy_demo:latest . to build the image file of the dockerized models
 
@@ -74,7 +74,7 @@ STEP 5: Now after deploying the model on docker we checked if we are getting pre
 
 ####  Inference Pipeline
 
-![](images/pipeline_3.png)
+![](images/pipeline_3.PNG)
 
 STEP 1: Hit the Fast Api to get the call transcripts with year and Company code
 
