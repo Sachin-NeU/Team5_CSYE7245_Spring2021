@@ -32,14 +32,14 @@ def removeStopwords(contents):
 
 def connect_to_aws():
     s3 = boto3.resource('s3')
-    bucket_name = 'edgarpipeline'
+    bucket_name = 'edgarpdp'
     my_bucket = s3.Bucket(bucket_name)
     output = ""
 
     for object_summary in my_bucket.objects.filter(Prefix="raw_layer/"):
         body = object_summary.get()['Body'].read()
         output = output + datacleaning(str(body))
-    print (output)
+    #print (output)
     return output
 
 def datacleaning(contents):
@@ -50,4 +50,4 @@ def datacleaning(contents):
 
 contents = connect_to_aws()
 client = boto3.client('s3')
-client.put_object(Body=contents, Bucket='edgarpipeline', Key='optimized_layer/cleaned_file.txt')
+client.put_object(Body=contents, Bucket='edgarpdp', Key='optimized_layer/cleaned_file.txt')

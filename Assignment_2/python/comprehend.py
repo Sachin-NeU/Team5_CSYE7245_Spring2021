@@ -27,7 +27,7 @@ def check_sentiments(content):
 
 def get_data_from_s3():
     s3 = boto3.resource('s3')
-    bucket_name = 'edgarpipeline'
+    bucket_name = 'edgarpdp'
     my_bucket = s3.Bucket(bucket_name)
     output = ""
 
@@ -43,4 +43,4 @@ content = get_data_from_s3()
 final_String = check_sentiments(content)
 
 client = boto3.client('s3')
-client.put_object(Body=final_String, Bucket='edgarpipeline', Key='labelled_data/labelled_file.csv')
+client.put_object(Body=final_String, Bucket='edgarpdp', Key='labelled_data/labelled_file.csv')
