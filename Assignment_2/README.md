@@ -85,6 +85,26 @@ STEP 3: For every file, hit the Docarized NLP model to get the sentimental score
 STEP 4:Stored the output in the CSV File for each company in S3 buckets
 
 
+#### Tree structure
+
+Assignment_2/
+├── comprehend/
+│   └── comprehend.py
+├── dag/
+│   ├── AnnotationAndTraining_Pipeline.py
+│   └── Inference_Pipeline.py
+├── dataprocessing/
+│   └── dataprocessing.py
+├── images/
+│   ├── pipeline_1.PNG
+│   ├── pipeline_2.PNG
+│   └── pipeline_3.PNG
+├── inference/
+│   └── inference.py
+├── Makefile
+├── README.md
+└── requirements.txt
+
 
 ### CLAAT Document
 
