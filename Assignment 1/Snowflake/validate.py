@@ -5,7 +5,7 @@ import pandas as pd
 engine = create_engine(URL(
     account = 'soa94276',
     user = 'vivekkulkarni',
-    password = 'Siemens@1',
+    password = '*********',
     database = 'SEVIRDB',
     schema = 'public',
     warehouse = 'SEVIRDATA',
