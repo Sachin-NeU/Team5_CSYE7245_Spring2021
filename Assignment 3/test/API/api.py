@@ -29,15 +29,27 @@ app = FastAPI()
 
 
 @app.post("/get_data")
-def create_item( item: Item):
+def Get_Items_By_Last_Name( item: Item):
     last_name = item.last_name
-    searchString = "select index_1 from tbl where " + 'last_name = ' + '\''  + last_name + '\''
+    searchString = "select * from tbl where " + 'last_name = ' + '\''  + last_name + '\''
     connection = connectSnowFlake()
     aa = selectFromSnowflake(searchString,connection)
     d = aa.to_dict(orient='records')
     json_records = json.dumps(d)
     print(json_records)
     return json_records
+    
+@app.get("/get")
+def Get_All_Data():
+    searchString = "select top 10 * from tbl "
+    connection = connectSnowFlake()
+    aa = selectFromSnowflake(searchString,connection)
+    d = aa.to_dict(orient='records')
+    json_records = json.dumps(d)
+    print(json_records)
+    return json_records
+    
+
 
 
 
