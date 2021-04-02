@@ -16,8 +16,6 @@
 
 https://www.kaggle.com/tamilsel/healthcare-providers-data
 
-#### Output Data 
-
 
 
 ### Architecture
@@ -29,7 +27,7 @@ https://www.kaggle.com/tamilsel/healthcare-providers-data
 
 
 
-#### Annotation and Training Pipeline
+#### Ingestion Pipeline
 
 
 
