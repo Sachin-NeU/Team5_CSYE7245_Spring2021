@@ -25,25 +25,22 @@ https://www.kaggle.com/tamilsel/healthcare-providers-data
 
 ### Usage
 
-
-
 #### Ingestion Pipeline
 
+STEP 1 : Create an Snowflake Account and get the account id from it
 
+STEP 2 : Download the Data from Kaggle and upload to S3 bucket
 
+STEP 3 : Run the airflow sceduler and then airflow webserver --port 88
 
+STEP 4 : Go to the API folder and start the API by using uvicorn api:app --reload
 
+STEP 5:  Hit the API using following endpoints:
+http://127.0.0.1:8000/get_from_location
+http://127.0.0.1:8000/get_from_name
+http://127.0.0.1:8000/get_national_provider_identifier
 
-
-####  Inference Pipeline
-
-
-
-
-#### Tree structure
-
-
-
+Pass the body and API token while calling the API
 
 ### CLAAT Document
 
