@@ -21,34 +21,38 @@ def connectSnowFlake():
 def selectFromSnowflake(string, engine):
     return pd.read_sql_query(string, engine)
 
-class Item(BaseModel):
-    last_name: str
+class Identifeir(BaseModel):
+    identfier_number: str
 
+class Name(BaseModel):
+    first_name: str
+    last_name : str
 
 app = FastAPI()
 
+def getdataFromSnowflake(searchString):
+    connection = connectSnowFlake()
+    aa = selectFromSnowflake(searchString,connection)
+    d = aa.to_dict(orient='records')
+    json_records = json.dumps(d)
+    final_dictionary = json.loads(json_records)
+    print(final_dictionary)
+    return final_dictionary
 
-@app.post("/get_data")
-def Get_Items_By_Last_Name( item: Item):
-    last_name = item.last_name
-    searchString = "select * from tbl where " + 'last_name = ' + '\''  + last_name + '\''
-    connection = connectSnowFlake()
-    aa = selectFromSnowflake(searchString,connection)
-    d = aa.to_dict(orient='records')
-    json_records = json.dumps(d)
-    print(json_records)
-    return json_records
-    
-@app.get("/get")
-def Get_All_Data():
-    searchString = "select top 10 * from tbl "
-    connection = connectSnowFlake()
-    aa = selectFromSnowflake(searchString,connection)
-    d = aa.to_dict(orient='records')
-    json_records = json.dumps(d)
-    print(json_records)
-    return json_records
-    
+@app.post("/get_national_provider_identifier")
+def get_identifier( identifeir: Identifeir):
+    identfier_number = identifeir.identfier_number
+    searchString = "select * from healthcare_fraud where " + 'national_provider_identifier = ' + '\''  + identfier_number + '\''
+    result = getdataFromSnowflake(searchString)
+    return result
+
+@app.post("/get_from_name")
+def get_identifier( name: Name):
+    first_name = name.first_name
+    last_name = name.last_name
+    searchString = "select * from healthcare_fraud where " + 'last_name = ' + '\''  + last_name + '\' and first_name_of_the_provider = ' + '\''  + first_name + '\''
+    result = getdataFromSnowflake(searchString)
+    return result
 
 
 
