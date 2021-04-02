@@ -32,7 +32,6 @@ async def get_api_key(
             status_code=HTTP_403_FORBIDDEN, detail="Could not validate credentials"
         )
 
-
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 

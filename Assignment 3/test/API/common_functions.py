@@ -1,6 +1,3 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-from fastapi.security.api_key import APIKeyQuery, APIKeyCookie, APIKeyHeader, APIKey
 from snowflake.sqlalchemy import URL
 from sqlalchemy import create_engine
 import pandas as pd
@@ -11,8 +8,6 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.openapi.utils import get_openapi
 from starlette.status import HTTP_403_FORBIDDEN
 from starlette.responses import RedirectResponse, JSONResponse
-from typing import Optional
-
 
 API_KEY = "1234567asdfgh"
 API_KEY_NAME = "access_token"
@@ -62,45 +57,3 @@ async def get_api_key(
         raise HTTPException(
             status_code=HTTP_403_FORBIDDEN, detail="Could not validate credentials"
         )
-class Identifeir(BaseModel):
-    identfier_number: str
-
-class Name(BaseModel):
-    first_name: str
-    middle_name: Optional[str] = None
-    last_name : str
-
-class location(BaseModel):
-    country: str
-    statecode:str
-
-app = FastAPI()
-
-
-@app.post("/get_national_provider_identifier")
-def get_identifier( identifeir: Identifeir,api_key: APIKey = Depends(get_api_key)):
-    identfier_number = identifeir.identfier_number
-    searchString = "select * from healthcare_fraud where " + 'national_provider_identifier = ' + '\''  + identfier_number + '\''
-    result = getdataFromSnowflake(searchString)
-    return result
-
-@app.post("/get_from_name")
-def get_name( name: Name,api_key: APIKey = Depends(get_api_key)):
-    first_name = name.first_name
-    last_name = name.last_name
-    middle_name = name.middle_name
-    searchString = "select * from healthcare_fraud where " + 'last_name = ' + '\''  + last_name + '\' and first_name_of_the_provider = ' + '\''  + first_name + '\''
-    if (middle_name != None):
-        searchString = searchString + ' and MIDDLE_INITIAL_OF_THE_PROVIDER = ' + '\''  + middle_name + '\''
-    result = getdataFromSnowflake(searchString)
-    return result
-
-@app.post("/get_from_location")
-def get_location( location: location,api_key: APIKey = Depends(get_api_key)):
-    country = location.country
-    state = location.statecode
-    searchString = "select * from healthcare_fraud where " + 'STATE_CODE_OF_THE_PROVIDER = ' + '\''  + state + '\' and COUNTRY_CODE_OF_THE_PROVIDER = ' + '\''  + country + '\''
-    print(searchString)
-    result = getdataFromSnowflake(searchString)
-    return result
-
