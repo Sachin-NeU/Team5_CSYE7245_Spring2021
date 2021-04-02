@@ -22,6 +22,7 @@ https://www.kaggle.com/tamilsel/healthcare-providers-data
 
 ### Architecture
 
+![](mingrammer/datalytics_inc._api_pipeline.png)
 
 
 ### Usage
