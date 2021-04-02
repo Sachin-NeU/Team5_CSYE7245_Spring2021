@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Header
 from pydantic import BaseModel
 from fastapi.security.api_key import APIKeyQuery, APIKeyCookie, APIKeyHeader, APIKey
 from snowflake.sqlalchemy import URL
@@ -62,7 +62,7 @@ async def get_api_key(
         raise HTTPException(
             status_code=HTTP_403_FORBIDDEN, detail="Could not validate credentials"
         )
-class Identifeir(BaseModel):
+class Identifier(BaseModel):
     identfier_number: str
 
 class Name(BaseModel):
@@ -78,8 +78,15 @@ app = FastAPI()
 
 
 @app.post("/get_national_provider_identifier")
-def get_identifier( identifeir: Identifeir,api_key: APIKey = Depends(get_api_key)):
-    identfier_number = identifeir.identfier_number
+def get_identifier( Identifier: Identifier,api_key: APIKey = Depends(get_api_key)):
+    identfier_number = Identifier.identfier_number
+    searchString = "select * from healthcare_fraud where " + 'national_provider_identifier = ' + '\''  + identfier_number + '\''
+    result = getdataFromSnowflake(searchString)
+    return result
+
+@app.post("/get_national_provider_identifier_key")
+def get_identifier( Identifier: Identifier):
+    identfier_number = Identifier.identfier_number
     searchString = "select * from healthcare_fraud where " + 'national_provider_identifier = ' + '\''  + identfier_number + '\''
     result = getdataFromSnowflake(searchString)
     return result
