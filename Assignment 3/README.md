@@ -108,6 +108,6 @@ Assignment_2/
 
 ### CLAAT Document
 
-https://docs.google.com/document/d/145ucdFuMAHekxhQy00UdD-H_JNqAjbHCuHR_CSWc42E/edit#
+https://docs.google.com/document/d/1-NmnM7srwGWZ-45wySZgE22JYcwdVlXZcJR4a7x-q_E/edit?usp=sharing
 
  
