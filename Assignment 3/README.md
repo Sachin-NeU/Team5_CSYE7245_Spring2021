@@ -2,6 +2,11 @@
 
 ### INTRODUCTION
 
+- The goal is to build a Fast API application
+- Review Moody’s API webinar and prepare a Graphviz diagram
+- Upload Healthcare data from Kaggle to S3 Bucket and load it in Snowflake Database
+- Build an API that can be used to query different aspects of the dataset.
+
 
 
 
