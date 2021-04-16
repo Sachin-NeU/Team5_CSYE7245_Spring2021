@@ -35,17 +35,15 @@ def test_get_api3_status_code_equals_200():
 
 def test_get_api4_status_code_equals_200():     
      params = {"inputUri": 's3://edgardataset/raw_layer/AGEN/', "outputUri":'s3://edgardataset/masked/'}
-     req = requests.get(url3, headers=headers , params=params)
-     assert req.status_code == 200
+     req = requests.get(url3, params=params)
+     assert req.status_code == 401
      
 def test_get_api5_status_code_equals_200():     
-     params = {"inputUri": 's3://edgardataset/raw_layer/AGEN/', "outputUri":'s3://edgardataset/masked/'}
-     req = requests.get(url3, headers=headers , params=params)
-     assert req.status_code == 200
-     
+     params = {"tag": "AGEN"}
+     req = requests.get(url2,  params=params)
+     assert req.status_code == 401
      
 def test_get_api6_status_code_equals_200():     
      params = {"inputUri": 's3://edgardataset/raw_layer/AGEN/', "outputUri":'s3://edgardataset/masked/'}
-     req = requests.get(url3, headers=headers , params=params)
-     assert req.status_code == 200
-     
+     req = requests.get(url3,  params=params)
+     assert req.status_code == 401
