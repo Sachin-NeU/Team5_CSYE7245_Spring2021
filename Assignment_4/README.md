@@ -28,6 +28,9 @@ A streamlit application to display results of all the 3 APIs and display the pre
 Annotation and Training Pipeline
 Architecture
 
+### Architecture
+
+![](Architecture/Assignment_4.jpg)
 
 ### Process:
 Read EDGAR dataset from S3 using lambda function
