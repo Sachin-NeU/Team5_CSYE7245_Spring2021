@@ -31,7 +31,15 @@ def test_post_headers_body_json():
     # print response full body as text
     print(resp.text)
     
-def test_get_all_check_status_code_equals_200_identifier():
+def test_get_bylastName_check_status_code_equals_200_identifier():
      response = requests.get("http://127.0.0.1:8000/1891106191")
      assert response.status_code == 200
      
+def test_get_top10_status_code_equals_200_identifier():
+     response = requests.get("http://127.0.0.1:8000/get_by_identifier_top10")
+     assert response.status_code == 200
+
+
+def test_get_country_status_code_equals_200_identifier():
+     response = requests.get("http://127.0.0.1:8000/get_by_country")
+     assert response.status_code == 200

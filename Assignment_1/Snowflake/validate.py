@@ -3,17 +3,17 @@ from sqlalchemy import create_engine
 import pandas as pd
 
 engine = create_engine(URL(
-    account = 'soa94276',
-    user = 'vivekkulkarni',
-    password = '*********',
-    database = 'SEVIRDB',
+    account = 'lra33674.us-east-1',
+    user = 'patelvidhic',
+    password = 'Ilove@9515',
+    database = 'STORMEVENTDATABASE',
     schema = 'public',
-    warehouse = 'SEVIRDATA',
+    warehouse = 'COMPUTE_WH',
     role='ACCOUNTADMIN'
 ))
 
 
 connection = engine.connect()
 
-df = pd.read_sql_query("SELECT * FROM data3files", engine)
+df = pd.read_sql_query("SELECT * FROM STORM_EVENT", engine)
 print(df.head())

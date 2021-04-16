@@ -85,11 +85,36 @@ def get_identifier( Identifier: Identifier,api_key: APIKey = Depends(get_api_key
     return result
 
 @app.post("/get_national_provider_identifier_key")
-def get_identifier( Identifier: Identifier):
+def get_identifier_for_key( Identifier: Identifier):
     identfier_number = Identifier.identfier_number
     searchString = "select * from healthcare_fraud where " + 'national_provider_identifier = ' + '\''  + identfier_number + '\''
     result = getdataFromSnowflake(searchString)
     return result
+    
+@app.get("/get_all")
+def get_identifier():
+    searchString = "select top 10 * from healthcare_fraud"
+    result = getdataFromSnowflake(searchString)
+    return result
+    
+@app.get("/get_by_identifier_top10")
+def get_by_identifier_top10():
+    searchString = "select top 10 * from healthcare_fraud where national_provider_identifier = 1891106191"
+    result = getdataFromSnowflake(searchString)
+    return result
+
+@app.get("/get_by_lastname")
+def get_by_lastname():
+    searchString = "select top 10 * from healthcare_fraud where last_name = 'JONES'"
+    result = getdataFromSnowflake(searchString)
+    return result
+    
+@app.get("/get_by_country")
+def get_by_country():
+    searchString = "select top 10 * from healthcare_fraud where COUNTRY_CODE_OF_THE_PROVIDER = 'US'"
+    result = getdataFromSnowflake(searchString)
+    return result
+
 
 @app.get("/{get_national_provider_identifier}")
 async def read_item(get_national_provider_identifier):
