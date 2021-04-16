@@ -102,8 +102,6 @@ else:
         st.write(json.dumps(j))
     elif encryption == 'Masked':
         st.write('API3 Masked Data')
-        st.write('The selected company : ' + company)
-        st.write("s3://edgardataset/raw_layer/" + company)
         params = {"inputUri": 's3://edgardataset/raw_layer/AGEN/', "outputUri":'s3://edgardataset/masked/'}
         req = requests.get(url3, headers=headers , params=params)
         j = json.loads(req.text)
