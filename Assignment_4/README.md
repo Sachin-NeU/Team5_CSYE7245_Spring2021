@@ -33,9 +33,23 @@ Architecture
 ![](Architecture/Assignment_4.jpg)
 
 ### Process:
-Read EDGAR dataset from S3 using lambda function
-Recognize entities for anonymization 
-Use Amazon Comprehend to anonymize and mask the data
+STEP 1 : Read EDGAR dataset from S3 using lambda function
+
+STEP 2 : Cleaned the data using Spacy library to remove Stopwords, remove whitespaces and using regex function to remove punctuation characters
+
+STEP 3 : Stored Cleaned Data in S3 Bucket
+
+STEP 4: Read the Cleaned Data , split every sentence on the basis of “.” character and hit the Amazon comprehend Api to recognize entities for anonymization
+
+STEP 5: Mask the data using Amazon Comprehend.
+
+STEP 6: Stored the Output to S3 bucket in CSV format, which is labelled data
+
+STEP 7: Use ALBERT pre-trained model trained on IMDB dataset for sentiment analysis
+
+STEP 8: Predict the sentiment of each sentences of EDGAR dataset 
+
+
 
 
 
