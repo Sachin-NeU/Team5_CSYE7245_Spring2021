@@ -1,48 +1,46 @@
-# multi-page-app
+# streamlit-multiapps
+A simple framework in python to create multi page web application using streamlit.
 
-# Watch the tutorial video
-[How to Make a Multi-Page Web App | Streamlit #16](https://youtu.be/nSw96qUbK9o)
+# How to Run
 
-<a href="https://youtu.be/nSw96qUbK9o"><img src="http://img.youtube.com/vi/nSw96qUbK9o/0.jpg" alt="How to Make a Multi-Page Web App | Streamlit #16" title="How to Make a Multi-Page Web App | Streamlit #16" width="400" /></a>
-
-# Demo
-
-Launch the web app:
-
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/dataprofessor/multi-page-app/main/app.py)
-
-# Reproducing this web app
-To recreate this web app on your own computer, do the following.
-
-### Create conda environment
-Firstly, we will create a conda environment called *multipage*
+1. Clone the repository:
 ```
-conda create -n multipage python=3.7.9
-```
-Secondly, we will login to the *multipage* environement
-```
-conda activate multipage
-```
-### Install prerequisite libraries
-
-Download requirements.txt file
-
-```
-wget https://raw.githubusercontent.com/dataprofessor/ml-auto-app/main/requirements.txt
-
+$ git clone git@github.com:upraneelnihar/streamlit-multiapps
+$ cd streamlit-multiapps
 ```
 
-Pip install libraries
+2. Install dependencies:
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
-### Download and unzip this repo
-
-Download [this repo](https://github.com/dataprofessor/multi-page-app/archive/main.zip) and unzip as your working directory.
-
-###  Launch the app
-
+3. Start the application:
 ```
 streamlit run app.py
 ```
+
+# How to add new app
+
+1. Add a new python file in `apps/`  folder with a function named `app`.
+
+```
+# apps/new_app.py
+
+import streamlit as st
+
+def app():
+    st.title('New App')
+```
+
+2. Now add it to `app.py`
+
+```
+from apps import newapp # import your app modules here
+
+app = MultiApp()
+
+# Add all your application here
+app.add_app("New App", newapp.app)
+```
+
+That's it your new app is added to your application and is live in default browser.
