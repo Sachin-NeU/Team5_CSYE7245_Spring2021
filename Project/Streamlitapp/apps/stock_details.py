@@ -9,26 +9,36 @@ import os
 import numpy as np
 import requests
 import io
+import tensorflow as tf 
+from sklearn.preprocessing import MinMaxScaler
+
+api_key = 'HN3A9YZW181QU71F'
 
 def app():
-    api_key = 'HN3A9YZW181QU71F'
-    st.set_option('deprecation.showPyplotGlobalUse', False)
-    st.title('Stocks')
-
-    url_string = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey="+api_key
-    response = requests.get(url_string)
-    r = response.content
-    rawData = pd.read_csv(io.StringIO(r.decode('utf-8'))) 
-    listsymbols = rawData['symbol'].tolist()
-    listsymbols.insert(0, "Select a Company")
-    listcompanies = rawData['name'].tolist()
-    ## select companies
-    company = st.sidebar.selectbox("Select company:", listsymbols, index = 0)
     
-    
+    list_symbols = []
+    def get_rawData():
+        Flag = False
+        if Flag == False:
+            st.set_option('deprecation.showPyplotGlobalUse', False)
 
-    if company != 'Select a Company':
-        st.write('The selected company: ' + company)
+            url_string = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey="+api_key
+            response = requests.get(url_string)
+            if response.status_code != 200:
+                Flag = False
+            r = response.content
+            rawData = pd.read_csv(io.StringIO(r.decode('utf-8'))) 
+            rawData = rawData[['symbol', 'name']]
+            Flag = True
+        
+        return rawData
+    
+    def get_company_overview(company_name):
+        overview_url_string = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=%s&apikey=%s"%(company_name,api_key)
+        response = requests.get(overview_url_string).json()
+        return response
+    
+    def get_graphs():
         url_string = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s"%(company,api_key)
         with urllib.request.urlopen(url_string) as url:
             data = json.loads(url.read().decode())
@@ -53,3 +63,115 @@ def app():
         plt.ylabel('Mid Price',fontsize=18)
         plt.show()    
         st.pyplot()
+        
+        
+        high_prices = df.loc[:,'High'].values
+        low_prices = df.loc[:,'Low'].values
+        mid_prices = (high_prices+low_prices)/2.0
+
+        train_len = int(len(mid_prices)*0.7)
+        #test_len = len(mid_prices) - int(len(mid_prices)*0.7)
+
+        #print(train_len, test_len)
+
+        train_data = mid_prices[:train_len]
+        test_data = mid_prices[train_len:]
+        scaler = MinMaxScaler()
+        train_data = train_data.reshape(-1,1)
+        test_data = test_data.reshape(-1,1)
+
+        smoothing_window_size = 2500
+        for di in range(0,len(train_data),smoothing_window_size):
+            scaler.fit(train_data[di:di+smoothing_window_size,:])
+            train_data[di:di+smoothing_window_size,:] = scaler.transform(train_data[di:di+smoothing_window_size,:])
+            
+        train_data = train_data.reshape(-1)
+
+        # Normalize test data
+        test_data = scaler.transform(test_data).reshape(-1)    
+        
+        EMA = 0.0
+        gamma = 0.1
+        for ti in range(len(train_data)):
+          EMA = gamma*train_data[ti] + (1-gamma)*EMA
+          train_data[ti] = EMA
+
+        # Used for visualization and test purposes
+        all_mid_data = np.concatenate([train_data,test_data],axis=0)
+        
+        window_size = 100
+        N = train_data.size
+        std_avg_predictions = []
+        std_avg_x = []
+        mse_errors = []
+
+        for pred_idx in range(window_size,N):
+
+            if pred_idx >= N:
+                date = dt.datetime.strptime(k, '%Y-%m-%d').date() + dt.timedelta(days=1)
+            else:
+                date = df.loc[pred_idx,'Date']
+
+            std_avg_predictions.append(np.mean(train_data[pred_idx-window_size:pred_idx]))
+            mse_errors.append((std_avg_predictions[-1]-train_data[pred_idx])**2)
+            std_avg_x.append(date)
+        
+        plt.figure(figsize = (18,9))
+        plt.plot(range(df.shape[0]),all_mid_data,color='b',label='True')
+        plt.plot(range(window_size,N),std_avg_predictions,color='orange',label='Prediction')
+        #plt.xticks(range(0,df.shape[0],50),df['Date'].loc[::50],rotation=45)
+        plt.xlabel('Date')
+        plt.ylabel('Mid Price')
+        plt.legend(fontsize=18)
+        plt.show()
+        st.pyplot()
+        
+        
+        window_size = 100
+        N = train_data.size
+
+        run_avg_predictions = []
+        run_avg_x = []
+
+        mse_errors = []
+
+        running_mean = 0.0
+        run_avg_predictions.append(running_mean)
+
+        decay = 0.5
+
+        for pred_idx in range(1,N):
+
+            running_mean = running_mean*decay + (1.0-decay)*train_data[pred_idx-1]
+            run_avg_predictions.append(running_mean)
+            mse_errors.append((run_avg_predictions[-1]-train_data[pred_idx])**2)
+            run_avg_x.append(date)
+            
+        plt.figure(figsize = (18,9))
+        plt.plot(range(df.shape[0]),all_mid_data,color='b',label='True')
+        plt.plot(range(0,N),run_avg_predictions,color='orange', label='Prediction')
+        #plt.xticks(range(0,df.shape[0],50),df['Date'].loc[::50],rotation=45)
+        plt.xlabel('Date')
+        plt.ylabel('Mid Price')
+        plt.legend(fontsize=18)
+        plt.show()
+        st.pyplot()
+
+    
+    if not list_symbols:
+        rawData = get_rawData() 
+        list_symbols = rawData['symbol'].tolist()
+        list_symbols.insert(0, "Select a Company")
+           
+    
+    company = st.sidebar.selectbox("Select company:", list_symbols, index = 0)
+    companyname = ''
+    if not companyname:
+        companyname = rawData.loc[rawData['symbol'] == company, 'name'].to_string(header=False, index=False)
+    
+
+    if company != 'Select a Company':
+        st.write('The selected company: ' + companyname)
+        company_response = get_company_overview(company)
+        st.write(company_response)
+        get_graphs()

@@ -5,8 +5,6 @@ import numpy as np
 def app():
     st.title('Home')
 
-    st.write("This is a sample home page in the mutliapp.")
-
 
 
 
