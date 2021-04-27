@@ -110,12 +110,12 @@ else:
         st.write('Please select a level of encryption.')
         
 ## Load sentiment Analysis file
-sent = pd.read_csv(r'C:\Users\Win10\Downloads\_data.csv', header=None, names=['Text', 'Sentiment_Score'])
-sent.Sentiment_Score = [t.replace( '[', '') for t in sent.Sentiment_Score]
-sent.Sentiment_Score = [t.replace( ']', '') for t in sent.Sentiment_Score]
-sent.Sentiment_Score = sent.Sentiment_Score.astype(float)
-sent['sentiment'] = ['Positive' if t >= 0.6 else 'Neutral' if 0.3 < t < 0.6 else 'Negative' for t in sent.Sentiment_Score]
-st.write(sent)
+# sent = pd.read_csv(r'C:\Users\Win10\Downloads\_data.csv', header=None, names=['Text', 'Sentiment_Score'])
+# sent.Sentiment_Score = [t.replace( '[', '') for t in sent.Sentiment_Score]
+# sent.Sentiment_Score = [t.replace( ']', '') for t in sent.Sentiment_Score]
+# sent.Sentiment_Score = sent.Sentiment_Score.astype(float)
+# sent['sentiment'] = ['Positive' if t >= 0.6 else 'Neutral' if 0.3 < t < 0.6 else 'Negative' for t in sent.Sentiment_Score]
+# st.write(sent)
     
     
     
