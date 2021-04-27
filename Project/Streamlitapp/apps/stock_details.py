@@ -169,9 +169,23 @@ def app():
     if not companyname:
         companyname = rawData.loc[rawData['symbol'] == company, 'name'].to_string(header=False, index=False)
     
-
-    if company != 'Select a Company':
-        st.write('The selected company: ' + companyname)
-        company_response = get_company_overview(company)
-        st.write(company_response)
-        get_graphs()
+    encryption = st.sidebar.selectbox("Select task",
+                                  ['---- Select ---',
+                                  'Get Details',
+                                  'Get Graphs',
+                                  'Get Predictions'],
+                                  index = 0
+                                  )
+    if 'Select' in company:
+        st.write('Please select a company.')
+    else:
+        if company != 'Select a Company':
+            st.write('The selected company: ' + companyname)
+            if encryption == 'Get Details':  
+                company_response = get_company_overview(company)
+                st.write(company_response)
+            if encryption == 'Get Graphs':  
+                get_graphs()
+    
+    
+        
