@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Win10/PycharmProjects/ml_flow1/mlruns/0/6d1ec026fd074ee39e53b6b1008ac641/artifacts
+end_time: 1619669152503
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+name: ''
+run_id: 6d1ec026fd074ee39e53b6b1008ac641
+run_uuid: 6d1ec026fd074ee39e53b6b1008ac641
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1619669091357
+status: 4
+tags: []
+user_id: Win10

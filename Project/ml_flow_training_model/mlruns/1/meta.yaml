@@ -1,0 +1,4 @@
+artifact_location: file:///C:/Users/Win10/PycharmProjects/ml_flow1/mlruns/1
+experiment_id: '1'
+lifecycle_stage: active
+name: stock_prediction
