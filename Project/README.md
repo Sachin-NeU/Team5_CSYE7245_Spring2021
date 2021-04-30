@@ -93,12 +93,6 @@ Go to the Amazon Kinesis console to sign up for the service and create an Amazon
 Mention name of Data Stream in Field:- Data stream name(eg twitter_data)
 Number of open shards:- 1
 ```
-### Create Kinsesis Data Stream
-Go to the Amazon Kinesis console to sign up for the service and create an Amazon Kinesis Data Stream. 
-```
-Mention name of Data Stream in Field:- Data stream name(eg twitter_data)
-Number of open shards:- 1
-```
 
 ### Create Kinesis Data Firehose - Create delivery stream
 Go to the Amazon Kinesis console to sign up for the service and create an Amazon Kinesis Data Firehose. 
