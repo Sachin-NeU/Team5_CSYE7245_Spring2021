@@ -178,6 +178,7 @@ def app():
                                   )
     if 'Select' in company:
         st.write('Please select a company.')
+    
     else:
         if company != 'Select a Company':
             st.write('The selected company: ' + companyname)
