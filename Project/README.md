@@ -139,7 +139,7 @@ pip3 install -r requirements.txt
 > Give path of the S3 location to the Lambda 
 
 
-### Deploying Consumer application on EC2
+### Deploying Producer application on EC2
 
 > git clone https://github.com/catchvivek94/Team5_CSYE7245_Spring2021.git
 
