@@ -12,7 +12,7 @@ import io
 import tensorflow as tf 
 from sklearn.preprocessing import MinMaxScaler
 import boto3
-
+import seaborn as sns
 api_key = 'HN3A9YZW181QU71F'
 
 def app():
@@ -21,7 +21,9 @@ def app():
     @st.cache
     def get_rawData():
         s3 = boto3.client('s3', 
-                  region_name='us-east-1') 
+                  region_name='us-east-1',
+                  aws_access_key_id='AKIAQI43754RSMRMJ76V', 
+                  aws_secret_access_key='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') 
 
         obj = s3.get_object(Bucket= 'lstmmodel', Key= 'listcompanies/listcompanies.csv') 
 
@@ -48,17 +50,46 @@ def app():
                 df.index = df.index + 1  
         
         df = df.sort_values('Date')
+      
+        df1 = df
+ 
+        df1['Daily Return'] = df['Close'].pct_change()
+         
+        plt.figure(figsize=(15,8))
+         
+        # Then we'll plot the daily return percentage
+        df1['Daily Return'].plot(legend=True, linestyle='--', marker='o')
+        st.write('Daily Return Percentage')
+        st.pyplot()
+    
 
-     
+        ## Average daily return
+         
+        
+        plt.figure(figsize=(15,8))
+        sns.distplot(df1['Daily Return'].dropna(), bins=100, color='purple')
+        plt.ylabel('Daily Return')
+        plt.title('Average Daily Return')
+        st.write('Average Daily Return')
+        st.pyplot()
+        
+        ## Autocorrelation with 5 days lag
+ 
+        plt.figure(figsize=(10,10))
+        pd.plotting.lag_plot(df['Open'], lag=5)
+        plt.title('Tesla Autocorrelation plot')
+        st.write('Autocorrelation with 5 days lag')
+        st.pyplot()
         
         plt.figure(figsize = (15,8))
         plt.plot(range(df.shape[0]),(df['Low']+df['High'])/2.0)
         plt.xticks(range(0,df.shape[0],500),df['Date'].loc[::500],rotation=45)
         plt.xlabel('Date',fontsize=18)
         plt.ylabel('Mid Price',fontsize=18)
-        plt.show()    
+        plt.show() 
+                
         st.pyplot()
-        
+
         
     def get_prediction_graphs():
         url_string = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s"%(company,api_key)

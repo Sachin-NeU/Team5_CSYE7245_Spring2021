@@ -28,8 +28,8 @@ def app():
     def get_rawData():
         s3 = boto3.client('s3', 
                   region_name='us-east-1',
-                  aws_access_key_id='AKIAQI43754RZCTWJJOX', 
-                  aws_secret_access_key='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') 
+                  aws_access_key_id='AKIAQI43754RSMRMJ76V', 
+                  aws_secret_access_key='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') 
 
         obj = s3.get_object(Bucket= 'lstmmodel', Key= 'listcompanies/listcompanies.csv') 
 
@@ -54,9 +54,10 @@ def app():
         return df
     
     def get_realtime_tweets(company_tweet):
-        s3 = boto3.client("s3", 
-                  region_name='us-east-1'
-                  )
+        s3 = boto3.client('s3', 
+                  region_name='us-east-1',
+                  aws_access_key_id='AKIAQI43754RSMRMJ76V', 
+                  aws_secret_access_key='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') 
 
         resource = boto3.resource('s3')
         today = str(datetime.date.today())
@@ -106,7 +107,7 @@ def app():
             for i in final_dictionary['data']:
                 df = df.append(i, ignore_index=True)
         df['ts']= pd.to_datetime(df['ts'])
-        df = df.set_index('tweet')
+        #df = df.set_index('tweet')
         #df = df.drop(['clean_tweet'], axis=1)
         return df
 
@@ -205,6 +206,32 @@ def app():
 
             st.pyplot()
             result = get_realtime_tweets(company)
-            st.table(result)
+            dfinal = pd.DataFrame(columns=['NEGATIVE', 'POSITIVE', 'NEUTRAL'])
+            negative = 0
+            positive = 0
+            neutral = 0
+            for i in range(0, len(result['sentiment'])):
+                
+                if result['sentiment'][i] == 'NEGATIVE':         
+                    negative += 1
+                elif result['sentiment'][i] == 'POSITIVE':
+                    positive += 1
+                elif result['sentiment'][i] == 'NEUTRAL':
+                    neutral +=1    
+            
+            dfinal = dfinal.append({'NEGATIVE' : negative,
+                        'POSITIVE' : positive,
+                       'NEUTRAL' : neutral} , 
+                        ignore_index=True)
+            def img_to_bytes(img_path):
+                img_bytes = Path(img_path).read_bytes()
+                encoded = base64.b64encode(img_bytes).decode()
+                return encoded
+                
+            st.button("Re-run")            
+            st.table(dfinal)
+            header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("twitter.png"))   
+            st.markdown(header_html, unsafe_allow_html=True,)
+            st.markdown (result)
     
    

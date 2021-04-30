@@ -153,9 +153,10 @@ def app():
         return output
 
     def get_realtime_tweets(company_tweet):
-        s3 = boto3.client("s3", 
-                  region_name='us-east-1'
-                  )
+        s3 = boto3.client('s3', 
+                  region_name='us-east-1',
+                  aws_access_key_id='AKIAQI43754RSMRMJ76V', 
+                  aws_secret_access_key='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') 
 
         resource = boto3.resource('s3')
         today = str(datetime.date.today())
@@ -195,7 +196,7 @@ def app():
         
         path = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour='+str(time_hour)+'/'
         
-        prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=00/'   
+        prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=07/'   
         
         df = pd.DataFrame(columns=['tweet', 'sentiment', 'sentiment_score','ts'])
         for obj in my_bucket.objects.filter(Prefix=prefix):    
@@ -206,7 +207,7 @@ def app():
                 df = df.append(i, ignore_index=True)
         df['ts']= pd.to_datetime(df['ts'])
         df = df.set_index('tweet')
-        df = df.drop(['clean_tweet'], axis=1)
+        #df = df.drop(['clean_tweet'], axis=1)
         return df
         
         
@@ -226,7 +227,7 @@ def app():
         company_tweet = st.selectbox("Select company",
                                   ['---- Select ---',
                                   'TSLA',
-                                  'APPL',
+                                  'AAPL',
                                   'FB',
                                   'MSFT','TWTR'],
                                   index = 0
