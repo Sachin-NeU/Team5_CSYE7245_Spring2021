@@ -114,14 +114,19 @@ S3 compression and encryption: Disabled
 ### Structure of S3 Bucket
 
 S3 Buckets is the main component where we would be storing all the stock data as well as Twitter Data. The structure looks like below
+- Item 1
+- Item 2
+  - Sub Item 1
+  - Sub Item 2
 
--raw_layer (Raw Data will be stored in this layer)
- -<Stock1>
-  -<Year>
-   -<Month>
-     -<Day>
-      -<Hour>
-       -<File.txt>
+
+- raw_layer (Raw Data will be stored in this layer)
+  -<Stock1>
+    -<Year>
+      -<Month>
+        -<Day>
+          -<Hour>
+            -<File.txt>
 -optimized_layer (Clean Data will be stored in this layer)
  -<Stock1>
   - <Year>
