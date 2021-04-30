@@ -90,7 +90,10 @@ canvas{
 
 
 def app():
-    st.title('Twitter')
+    header_html1 = "<p style='text-align-last:center;font-size: 2rem'>Twitter Analysis</p>"
+    st.markdown(
+        header_html1, unsafe_allow_html=True,
+    )
     
     topics = st.sidebar.selectbox("Select task",
                                   ['---- Select ---',
@@ -153,10 +156,9 @@ def app():
         return output
 
     def get_realtime_tweets(company_tweet):
-        s3 = boto3.client('s3', 
-                  region_name='us-east-1',
-                  aws_access_key_id='AKIAQI43754RSMRMJ76V', 
-                  aws_secret_access_key='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') 
+        s3 = boto3.client("s3", 
+                  region_name='us-east-1'
+                  )
 
         resource = boto3.resource('s3')
         today = str(datetime.date.today())
@@ -196,7 +198,7 @@ def app():
         
         path = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour='+str(time_hour)+'/'
         
-        prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=07/'   
+        prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=00/'   
         
         df = pd.DataFrame(columns=['tweet', 'sentiment', 'sentiment_score','ts'])
         for obj in my_bucket.objects.filter(Prefix=prefix):    
@@ -214,7 +216,7 @@ def app():
         
     if topics == 'Get Tweets':  
         contents = connect_to_aws()
-        
+        st.write('Please add tags you want to search:')
         #st.write(contents)
         hashtag = st.text_area("*Enter any keyword to get data from twitter*")        
         if st.button("Show Data"):
@@ -224,15 +226,19 @@ def app():
            st.table(recent_tweets)
            
     elif topics == 'Get Sentiments':
+        header_html4 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Please select a company for live streaming tweets</p>"
+
+        st.markdown(
+            header_html4, unsafe_allow_html=True,
+        )
         company_tweet = st.selectbox("Select company",
                                   ['---- Select ---',
                                   'TSLA',
-                                  'AAPL',
+                                  'APPL',
                                   'FB',
                                   'MSFT','TWTR'],
                                   index = 0
                                   )
-        st.write('Sentiments Segregation')
         result = get_realtime_tweets(company_tweet)
         dfinal = pd.DataFrame(columns=['NEGATIVE', 'POSITIVE', 'NEUTRAL'])
         negative = 0
@@ -251,8 +257,16 @@ def app():
                     'POSITIVE' : positive,
                    'NEUTRAL' : neutral} , 
                     ignore_index=True)
-        st.button("Re-run")            
-        st.table(dfinal)    
+        #st.button("Re-run")
+        header_html3 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Sentiments Segregation</p>"
+        st.markdown(
+            header_html3, unsafe_allow_html=True,
+        )
+        st.table(dfinal)
+        header_html5 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Tweets and Scores</p>"
+        st.markdown(
+            header_html5, unsafe_allow_html=True,
+        )
         st.table(result)
         
         

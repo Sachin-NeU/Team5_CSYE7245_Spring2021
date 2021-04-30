@@ -20,16 +20,17 @@ from tensorflow.keras.models import model_from_json
 api_key = 'HN3A9YZW181QU71F'
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-def app():    
-    st.title('Our Prediction')
+def app():
+    header_html1 = "<p style='text-align-last:center;font-size: 2rem'>Our Predictions</p>"
+    st.markdown(
+        header_html1, unsafe_allow_html=True,
+    )
     list_symbols = []
     
     @st.cache
     def get_rawData():
         s3 = boto3.client('s3', 
-                  region_name='us-east-1',
-                  aws_access_key_id='AKIAQI43754RSMRMJ76V', 
-                  aws_secret_access_key='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') 
+                  region_name='us-east-1')
 
         obj = s3.get_object(Bucket= 'lstmmodel', Key= 'listcompanies/listcompanies.csv') 
 
@@ -54,10 +55,9 @@ def app():
         return df
     
     def get_realtime_tweets(company_tweet):
-        s3 = boto3.client('s3', 
-                  region_name='us-east-1',
-                  aws_access_key_id='AKIAQI43754RSMRMJ76V', 
-                  aws_secret_access_key='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') 
+        s3 = boto3.client("s3", 
+                  region_name='us-east-1'
+                  )
 
         resource = boto3.resource('s3')
         today = str(datetime.date.today())
@@ -97,7 +97,7 @@ def app():
         
         path = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour='+str(time_hour)+'/'
         
-        prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=00/'   
+        prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=07/'
         
         df = pd.DataFrame(columns=['tweet', 'sentiment', 'sentiment_score','ts'])
         for obj in my_bucket.objects.filter(Prefix=prefix):    
@@ -107,7 +107,7 @@ def app():
             for i in final_dictionary['data']:
                 df = df.append(i, ignore_index=True)
         df['ts']= pd.to_datetime(df['ts'])
-        #df = df.set_index('tweet')
+        df = df.set_index('tweet')
         #df = df.drop(['clean_tweet'], axis=1)
         return df
 
@@ -132,20 +132,24 @@ def app():
         if company != 'Select a Company':
         
             
-            st.write('The selected company: ' + companyname)
+            st.success('Selected Company: '+companyname)
             df = get_stock_data(company)
             # Sort DataFrame by date
             df = df.sort_values('Date')
             
 
             #MODEL
-            st.write('LSTM Model')
-            json_file = open('C:/Vivek/PDP/Team5_CSYE7245_Spring2021/Project/model/model.json', 'r')
+            header_html4 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>LSTM Model</p>"
+
+            st.markdown(
+                header_html4, unsafe_allow_html=True,
+            )
+            json_file = open('C:/Users/adwai/Documents/Git/Team5_CSYE7245_Spring2021/Project/model/model.json', 'r')
             loaded_model_json = json_file.read()
             json_file.close()
             loaded_model = model_from_json(loaded_model_json)
             # load weights into new model
-            loaded_model.load_weights("C:/Vivek/PDP/Team5_CSYE7245_Spring2021/Project/model/model.h5")
+            loaded_model.load_weights("C:/Users/adwai/Documents/Git/Team5_CSYE7245_Spring2021/Project/model/model.h5")
             
             #loaded_model.load_weights("C:/Vivek/PDP/Team5_CSYE7245_Spring2021/Project/model/model.h5")
             # Create a new dataframe with only the 'Close column 
@@ -211,27 +215,47 @@ def app():
             positive = 0
             neutral = 0
             for i in range(0, len(result['sentiment'])):
-                
-                if result['sentiment'][i] == 'NEGATIVE':         
+
+                if result['sentiment'][i] == 'NEGATIVE':
                     negative += 1
                 elif result['sentiment'][i] == 'POSITIVE':
                     positive += 1
                 elif result['sentiment'][i] == 'NEUTRAL':
-                    neutral +=1    
-            
-            dfinal = dfinal.append({'NEGATIVE' : negative,
-                        'POSITIVE' : positive,
-                       'NEUTRAL' : neutral} , 
-                        ignore_index=True)
-            def img_to_bytes(img_path):
-                img_bytes = Path(img_path).read_bytes()
-                encoded = base64.b64encode(img_bytes).decode()
-                return encoded
-                
-            st.button("Re-run")            
+                    neutral += 1
+
+            dfinal = dfinal.append({'NEGATIVE': negative,
+                                    'POSITIVE': positive,
+                                    'NEUTRAL': neutral},
+                                   ignore_index=True)
+            header_html5 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Sentiment Analysis of Tweets</p>"
+
+            st.markdown(
+                header_html5, unsafe_allow_html=True,
+            )
             st.table(dfinal)
-            header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("twitter.png"))   
-            st.markdown(header_html, unsafe_allow_html=True,)
-            st.markdown (result)
-    
+            Stock_Verdict = 'Hold'
+            if negative > positive and negative > neutral:
+                Stock_Verdict = 'Sell'
+            elif positive > negative and positive > neutral:
+                Stock_Verdict = 'Buy'
+            elif neutral > negative and neutral > positive:
+                Stock_Verdict = 'Hold'
+
+            header_html6 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Stock Verdicts</p>"
+
+            st.markdown(
+                header_html6, unsafe_allow_html=True,
+            )
+            if Stock_Verdict == 'Buy':
+                st.success(Stock_Verdict)
+            if Stock_Verdict == 'Sell':
+                st.fails(Stock_Verdict)
+            if Stock_Verdict == 'Hold':
+                st.warning(Stock_Verdict)
+            header_html7 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Tweets</p>"
+
+            st.markdown(
+                header_html7, unsafe_allow_html=True,
+            )
+            st.table(result)
    

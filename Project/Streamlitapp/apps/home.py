@@ -1,27 +1,42 @@
+import base64
+
 import streamlit as st
 import pandas as pd
 import numpy as np
 import time
+import pathlib
+
 
 def app():
-    st.title('Home')
+    header_html1 = "<p style='text-align-last:center;font-size: 2rem'>Team 5 Project</p>"
+    st.markdown(
+        header_html1, unsafe_allow_html=True,
+    )
     
-    # progress_bar = st.sidebar.progress(0)
-    # status_text = st.sidebar.empty()
-    # last_rows = np.random.randn(1, 1)
-    # chart = st.line_chart(last_rows)
 
-    # for i in range(1, 101):
-        # new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-        # status_text.text("%i%% Complete" % i)
-        # chart.add_rows(new_rows)
-        # progress_bar.progress(i)
-        # last_rows = new_rows
-        # time.sleep(1)
+    def img_to_bytes(img_path):
+        img_bytes = pathlib.Path(img_path).read_bytes()
+        encoded = base64.b64encode(img_bytes).decode()
+        return encoded
 
-    # progress_bar.empty()
+    header_html = "<img src='data:image/png width=10 height=10;base64,{}' class='img-fluid' style='height: 200px;display: block;margin-left: auto;margin-right: auto;width: auto'>".format(
+        img_to_bytes("twitter.png")
+    )
+    st.markdown(
+        header_html, unsafe_allow_html=True,
+    )
 
+    header_html2 = "<img src='data:image/png width=10 height=10;base64,{}' class='img-fluid' style='height: 100px;display: block;margin-left: auto;margin-right: auto;margin-top: 52px;margin-bottom:39px;width: auto;'>".format(
+        img_to_bytes("alpha.png")
+    )
+    st.markdown(
+        header_html2, unsafe_allow_html=True,
+    )
 
+    header_html3 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(9, 171, 59, 0.2);background-color:rgba(9, 171, 59, 0.2)'>Adwait Sathe | Sachin | Vivek Kulkarni</p>"
+    st.markdown(
+        header_html3, unsafe_allow_html=True,
+    )
     # st.button("Re-run")
 
 

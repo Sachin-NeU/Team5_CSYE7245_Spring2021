@@ -69,8 +69,8 @@ app = MultiApp()
 
 # Add all your application here
 app.add_app("Home", home.app)
-app.add_app("Stocks Data", stock_details.app)
-app.add_app("Twitter Data", twitter.app)
-app.add_app("Prediction", model.app)
+app.add_app("Stocks", stock_details.app)
+app.add_app("Twitter", twitter.app)
+app.add_app("Model", model.app)
 # The main app
 app.run()
