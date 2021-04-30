@@ -89,7 +89,6 @@ canvas{
 )
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-@st.cache
 def app():
     header_html1 = "<p style='text-align-last:center;font-size: 2rem'>Twitter Analysis</p>"
     st.markdown(

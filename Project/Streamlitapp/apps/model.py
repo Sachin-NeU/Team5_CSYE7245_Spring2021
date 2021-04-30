@@ -20,7 +20,7 @@ from tensorflow.keras.models import model_from_json
 api_key = 'HN3A9YZW181QU71F'
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-@st.cache
+
 def app():
     header_html1 = "<p style='text-align-last:center;font-size: 2rem'>Our Predictions</p>"
     st.markdown(
@@ -147,12 +147,12 @@ def app():
             st.markdown(
                 header_html4, unsafe_allow_html=True,
             )
-            json_file = open('C:/Users/adwai/Documents/Git/Team5_CSYE7245_Spring2021/Project/model/model.json', 'r')
+            json_file = open('/home/ec2-user/final/Team5_CSYE7245_Spring2021/Project/model/model.json', 'r')
             loaded_model_json = json_file.read()
             json_file.close()
             loaded_model = model_from_json(loaded_model_json)
             # load weights into new model
-            loaded_model.load_weights("C:/Users/adwai/Documents/Git/Team5_CSYE7245_Spring2021/Project/model/model.h5")
+            loaded_model.load_weights("/home/ec2-user/final/Team5_CSYE7245_Spring2021/Project/model/model.h5")
             
             #loaded_model.load_weights("C:/Vivek/PDP/Team5_CSYE7245_Spring2021/Project/model/model.h5")
             # Create a new dataframe with only the 'Close column 
@@ -252,7 +252,7 @@ def app():
             if Stock_Verdict == 'Buy':
                 st.success(Stock_Verdict)
             if Stock_Verdict == 'Sell':
-                st.fails(Stock_Verdict)
+                st.warning(Stock_Verdict)
             if Stock_Verdict == 'Hold':
                 st.warning(Stock_Verdict)
             header_html7 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Tweets</p>"
