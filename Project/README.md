@@ -143,5 +143,14 @@ pip3 install configparser
 Run the WebApp by running `streamlit run app.py`. 
 
 
+### Building Docker File
+We have dockerized the application for easy use of the application.
 
-![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)
+Command used to dockerize the application
+```
+sudo docker build -t [appname]:latest
+sudo docker images
+sudo docker run -p 8501:8501 mystapp:latest
+```
+![image](https://user-images.githubusercontent.com/59774725/116688307-8958af80-a984-11eb-8576-014fc9cb54c9.png)
+
