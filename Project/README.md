@@ -74,7 +74,7 @@ Clone this repo to your local machine using `https://github.com/catchvivek94/Tea
 As lot of apps are going to run simultaneoulsly on the EC2 Instance(We need 4 vCPU EC2 instance) , choose t2.xlarge
 
 Setup Security group inbound access as per below Image
-![alt text](https://github.com/holladileep/TS-Pipeline/blob/dev/img/CSYE7245_v2-2.png)
+![alt text](https://github.com/catchvivek94/Team5_CSYE7245_Spring2021/blob/main/Project/images/ec2_security.PNG)
 
 Install pip and git on Ec2 using following commands
 
