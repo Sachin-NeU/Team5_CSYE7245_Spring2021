@@ -12,7 +12,7 @@ Vivek Kulkarni <br />
 
 ##### Presentations <br />
 [Presentation](https://docs.google.com/document/d/1YMq5QQI7rR6wszhGaVp9iZlRndOikG59GAwNEQaf1f4/edit?usp=sharing)<br />
-[Project Proposal](https://docs.google.com/document/d/1QRjOFOU81qru-dsCTIoF4OCbajMffB-vANqJgpZCjGs/edit?usp=sharing)<br />
+[Project Proposal](https://docs.google.com/document/d/1bA-ub0TiGgQjVOulephp--b_WJovU-EI6D1JA5N0jwc/edit#heading=h.n8d7ycbpbk04)<br />
 
 
 ##### Streamlit Application<br />
@@ -38,7 +38,7 @@ Real time Data Pipeline for ingesting tweets of stocks from Twitter and Finding 
 
 #### Architecture 
 
-![alt text](https://github.com/holladileep/TS-Pipeline/blob/dev/img/CSYE7245_v2-2.png)
+![alt text](https://github.com/catchvivek94/Team5_CSYE7245_Spring2021/blob/main/Project/images/architecture.jpg)
 
 ---
 
