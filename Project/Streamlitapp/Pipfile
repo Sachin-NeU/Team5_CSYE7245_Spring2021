@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+streamlit = "*"
+numpy = "*"
+pandas = "*"
+sklearn = "*"
+pandas-datareader = "*"
+matplotlib = "*"
+DateTime = "*"
+urllib = "*"
+os = "*"
+requests = "*"
+io = "*"
+tensorflow = "*"
+boto3 = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
