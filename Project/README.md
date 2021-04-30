@@ -16,7 +16,7 @@ Vivek Kulkarni <br />
 
 
 ##### Streamlit Application<br />
-> :warning: The instance hosting this Web Application has been shutdown to avoid recurring AWS Charges. Follow instructions below to setup and deploy your own Streamlit Application<br />
+Follow instructions below to setup and deploy your own Streamlit Application<br />
 
 [TS-Pipeline | WebApp](http://18.234.153.64:8501/)<br /> 
 
@@ -34,7 +34,7 @@ Vivek Kulkarni <br />
 
 ## Introduction
 
-Scalable Data Pipeline for scraping/collecting articles, generating text summaries & sentiment analysis, benchmarking ROUGE scores, and deploying them on the cloud to run completely on a Serverless Infrastructure on-demand. Summarization is done using `bert` models based on the HuggingFace Pytorch transformers library to run extractive summarizations.
+Real time Data Pipeline for ingesting tweets of stocks from Twiiter and Finding the Sentiments of the Tweets. Summarization is done using `LSTM` models based on the HuggingFace Pytorch transformers library to run extractive summarizations.
 
 #### Architecture 
 
@@ -45,7 +45,7 @@ Scalable Data Pipeline for scraping/collecting articles, generating text summari
 
 ## Setup
 
-The pipeline requires an Amazon Web Services account to deploy and run. Signup for an AWS Account [here](https://portal.aws.amazon.com/billing/signup#/start). The pipeline uses the folllowing AWS Services:
+The pipeline requires an Amazon Web Services account to deploy and run. The pipeline uses the folllowing AWS Services:
 
 - Lambda 
 - S3
@@ -56,14 +56,20 @@ The pipeline requires an Amazon Web Services account to deploy and run. Signup f
 - Kinesis Data Streams
 - Kinesis Data Firehose
 
+Signup for an AWS Account [here](https://portal.aws.amazon.com/billing/signup#/start)
 
-Aplha API Setup
+Signup for an  Aplha API Account [here](https://www.alphavantage.co/)
 
+Signup for an Twitter Developer Account [here](https://developer.twitter.com/en/apply-for-access)
 
 
 ### Clone
 
 Clone this repo to your local machine using `https://github.com/catchvivek94/Team5_CSYE7245_Spring2021.git`
+
+### Creating EC2 Instance
+
+As lot of apps are going to run simultaneoulsly on the EC2 Instance(We need 4 vCPU EC2 instance) , choose t2.xlarge
 
 
 ### Deploying Lambda Functions 
