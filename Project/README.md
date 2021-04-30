@@ -115,9 +115,9 @@ S3 compression and encryption: Disabled
 
 S3 Buckets is the main component where we would be storing all the stock data as well as Twitter Data. The structure looks like below
 - Item 1
-- Item 2
-  - Sub Item 1
-  - Sub Item 2
+  - Item 2
+   - Sub Item 1
+    - Sub Item 2
 
 
 - raw_layer (Raw Data will be stored in this layer)
