@@ -87,6 +87,38 @@ Install all Libraries necessary for project using requirement.txt File
 pip install -r requirement.txt
 ```
 
+### Create Kinsesis Data Stream
+Go to the Amazon Kinesis console to sign up for the service and create an Amazon Kinesis Data Stream. 
+```
+Mention name of Data Stream in Field:- Data stream name(eg twitter_data)
+Number of open shards:- 1
+```
+### Create Kinsesis Data Stream
+Go to the Amazon Kinesis console to sign up for the service and create an Amazon Kinesis Data Stream. 
+```
+Mention name of Data Stream in Field:- Data stream name(eg twitter_data)
+Number of open shards:- 1
+```
+
+### Create Kinesis Data Firehose - Create delivery stream
+Go to the Amazon Kinesis console to sign up for the service and create an Amazon Kinesis Data Firehose. 
+
+```
+Delivery stream name:- Name of the app(eg twitter_data_app)
+Source:- Kinesis Data Stream
+Kinesis data stream:- Data stream name(eg twitter_data)
+Transform source records with AWS Lambda : Disabled
+Data transformation : Disabled
+Convert record format: Disabled
+Destination:Amazon S3
+S3 bucket :- Output Bucket
+Buffer size :- 5 MiB
+Buffer interval :- 60 sec
+S3 compression and encryption: Disabled
+```
+
+
+
 ### Deploying Lambda Functions 
 
 The pipeline extensively uses AWS Lambda Functions for Serverless Computing. All directories on this repo marked with the prefix `lambda-` are Lambda functions that have to be deployed on AWS. All functions follow a common deployment process. 
