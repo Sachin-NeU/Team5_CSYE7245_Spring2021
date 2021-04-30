@@ -140,10 +140,7 @@ def app():
 
 
     def connect_to_aws():
-        session = boto3.Session(
-        #aws_access_key_id='AKIAQI43754RXAMPRMNJ',
-        #aws_secret_access_key='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',
-        )
+        session = boto3.Session()
         s3 = session.resource('s3')
         bucket_name = 'edgarpipeline'
         my_bucket = s3.Bucket(bucket_name)
@@ -157,10 +154,7 @@ def app():
 
     def get_realtime_tweets(company_tweet):
         s3 = boto3.client("s3", 
-                  region_name='us-east-1'
-                  #aws_access_key_id='AKIAI33YWGOX7YNTQVSA', 
-                  #aws_secret_access_key='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'
-                  )
+                  region_name='us-east-1')
 
         resource = boto3.resource('s3')
         today = str(datetime.date.today())
