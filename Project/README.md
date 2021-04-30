@@ -158,3 +158,17 @@ sudo docker run -p 8501:8501 mystapp:latest
 ```
 ![image](https://user-images.githubusercontent.com/59774725/116688307-8958af80-a984-11eb-8576-014fc9cb54c9.png)
 
+### Training LSTM model using MLflow
+MLflow is an open source platform for managing the end-to-end machine learning lifecycle. This project requires a Conda environment to run - install Conda on your machine from [here](https://conda.io/projects/conda/en/latest/user-guide/install/download.html)
+
+#### Code related to MLflow:
+* [`mlflow.tensorflow.autolog()`](https://www.mlflow.org/docs/latest/tracking.html#automatic-logging-from-tensorflow-and-keras-experimental):
+This is an experimental api that logs ML model artifacts and TensorBoard metrics created by the `tf.estimator` we are using.
+The TensorBoard metrics are logged during training of the model. By default, MLflow autologs every 100 steps.
+The ML model artifact creation is handled during the call to `tf.estimator.export_saved_model()`.
+
+* stock_prediction:
+This function loads back the model as a generic python function. You can predict on this with a pandas DataFrame input.
+
+
+
