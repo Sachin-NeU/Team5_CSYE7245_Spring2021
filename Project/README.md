@@ -144,9 +144,9 @@ Run the WebApp by running `streamlit run app.py`.
 
 
 ### Building Docker File
-We have dockerized the application for easy use of the application.
+We have dockerized the application so that anyone can consume the application as they need.
 
-Command used to dockerize the application
+Commands used to dockerize the application
 ```
 sudo docker build -t [appname]:latest
 sudo docker images
