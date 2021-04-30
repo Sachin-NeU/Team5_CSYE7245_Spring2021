@@ -117,50 +117,6 @@ S3 Buckets is the main component where we would be storing all the stock data as
     
 ---
 
-
-
-
-
-
-
-
-
-
-
-### Building Streamlit Application 
-
-Streamlit Application is used as a Front end for our pipeline.
-
-### Deploying Streamlit App 
-
-The Python code for this app can be found at `Streamlitapp/app.py`. This app is deployed on the EC2 Instance.
-
-> Install required libraries
-
-```
-pip3 install streamlit
-pip3 install boto3
-```
-
-> Run `app.py`
-
-Run the WebApp by running `streamlit run app.py`. 
-
-
-### Building Docker File
-We have dockerized the application so that anyone can consume the application as they need.
-
-Commands used to dockerize the application
-```
-sudo docker build -t [appname]:latest
-sudo docker images
-sudo docker run -p 8501:8501 mystapp:latest
-```
-![image](https://user-images.githubusercontent.com/59774725/116688307-8958af80-a984-11eb-8576-014fc9cb54c9.png)
-
-### Training LSTM model using MLflow
-MLflow is an open source platform for managing the end-to-end machine learning lifecycle. This project requires a Conda environment to run - install Conda on your machine from [here](https://conda.io/projects/conda/en/latest/user-guide/install/download.html)
-
 #### Code related to MLflow:
 * [`mlflow.tensorflow.autolog()`](https://www.mlflow.org/docs/latest/tracking.html#automatic-logging-from-tensorflow-and-keras-experimental):
 This is an experimental api that logs ML model artifacts and TensorBoard metrics created by the `tf.estimator` we are using.
@@ -206,6 +162,44 @@ mlflow ui
 and navigating to [http://localhost:5000](http://localhost:5000). This MLflow UI will help you version control the model and helps in tracking each model run.
 
 For more information on MLflow tracking, click [here](https://www.mlflow.org/docs/latest/tracking.html#mlflow-tracking) to view documentation.
+
+---
+
+
+### Building Streamlit Application 
+
+Streamlit Application is used as a Front end for our pipeline.
+
+### Deploying Streamlit App 
+
+The Python code for this app can be found at `Streamlitapp/app.py`. This app is deployed on the EC2 Instance.
+
+> Install required libraries
+
+```
+pip3 install streamlit
+pip3 install boto3
+```
+
+> Run `app.py`
+
+Run the WebApp by running `streamlit run app.py`. 
+
+
+### Building Docker File
+We have dockerized the application so that anyone can consume the application as they need.
+
+Commands used to dockerize the application
+```
+sudo docker build -t [appname]:latest
+sudo docker images
+sudo docker run -p 8501:8501 mystapp:latest
+```
+![image](https://user-images.githubusercontent.com/59774725/116688307-8958af80-a984-11eb-8576-014fc9cb54c9.png)
+
+### Training LSTM model using MLflow
+MLflow is an open source platform for managing the end-to-end machine learning lifecycle. This project requires a Conda environment to run - install Conda on your machine from [here](https://conda.io/projects/conda/en/latest/user-guide/install/download.html)
+
 
 
 
