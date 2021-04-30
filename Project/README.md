@@ -142,7 +142,9 @@ pip3 install -r requirements.txt
 ### Deploying Consumer application on EC2
 
 > git clone https://github.com/catchvivek94/Team5_CSYE7245_Spring2021.git
+
 > Go to Directory Project/Ingestion_script/
+
 > run the python file continuosly in the background using command:- nohup producer.py &
 
 
