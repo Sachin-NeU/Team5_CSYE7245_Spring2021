@@ -34,7 +34,7 @@ Follow instructions below to setup and deploy your own Streamlit Application<br 
 
 ## Introduction
 
-Real time Data Pipeline for ingesting tweets of stocks from Twiiter and Finding the Sentiments of the Tweets. Summarization is done using `LSTM` models based on the HuggingFace Pytorch transformers library to run extractive summarizations.
+Real time Data Pipeline for ingesting tweets of stocks from Twitter and Finding the Sentiments of the Tweets. Summarization is done using `LSTM` models based on the HuggingFace Pytorch transformers library to run extractive summarizations.
 
 #### Architecture 
 
@@ -66,11 +66,26 @@ Signup for an Twitter Developer Account [here](https://developer.twitter.com/en/
 ### Clone
 
 Clone this repo to your local machine using `https://github.com/catchvivek94/Team5_CSYE7245_Spring2021.git`
+![alt text](https://github.com/holladileep/TS-Pipeline/blob/dev/img/CSYE7245_v2-2.png)
+
 
 ### Creating EC2 Instance
 
 As lot of apps are going to run simultaneoulsly on the EC2 Instance(We need 4 vCPU EC2 instance) , choose t2.xlarge
 
+Setup Security group inbound access as per below Image
+![alt text](https://github.com/holladileep/TS-Pipeline/blob/dev/img/CSYE7245_v2-2.png)
+
+Install pip and git on Ec2 using following commands
+
+```
+sudo yum -y install python-pip
+yum install git
+```
+Install all Libraries necessary for project using requirement.txt File
+```
+pip install -r requirement.txt
+```
 
 ### Deploying Lambda Functions 
 
