@@ -21,9 +21,7 @@ def app():
     @st.cache
     def get_rawData():
         s3 = boto3.client('s3', 
-                  region_name='us-east-1',
-                  aws_access_key_id='AKIAI33YWGOX7YNTQVSA', 
-                  aws_secret_access_key='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') 
+                  region_name='us-east-1') 
 
         obj = s3.get_object(Bucket= 'lstmmodel', Key= 'listcompanies/listcompanies.csv') 
 

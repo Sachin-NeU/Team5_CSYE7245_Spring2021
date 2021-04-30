@@ -12,6 +12,8 @@ import io
 import tensorflow as tf 
 from sklearn.preprocessing import MinMaxScaler
 import boto3
+import datetime
+from pytz import timezone
 
 from tensorflow.keras.models import model_from_json
 
@@ -50,7 +52,66 @@ def app():
             
             df = df.sort_values('Date')
         return df
+    
+    def get_realtime_tweets(company_tweet):
+        s3 = boto3.client("s3", 
+                  region_name='us-east-1'
+                  )
+
+        resource = boto3.resource('s3')
+        today = str(datetime.date.today())
         
+        datee = datetime.datetime.strptime(today, "%Y-%m-%d")
+        current_month = str(datee.month)
+
+        if int(current_month) > 9:
+            current_month = current_month
+        else:
+            current_month = '0' + str(current_month)
+            
+        current_day = str(datee.day)
+        if int(current_day) > 9:
+            current_day = current_day
+        else:
+            current_day = '0' + str(current_day)
+            
+        current_year = str(datee.year)
+
+        if int(current_year) > 9:
+            current_year = current_year
+        else:
+            current_year = '0' + str(current_year)
+            
+        now = datetime.datetime.now()
+        now_utc = datetime.datetime.now(timezone('UTC'))
+        format = "%H"
+        
+        time_hour = now_utc.strftime(format)
+        if int(time_hour) > 10:
+            time_hour = time_hour
+        else:
+            time_hour = '0' + str(time_hour)
+            
+        my_bucket = resource.Bucket('stockpriceteam5business')
+        
+        path = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour='+str(time_hour)+'/'
+        
+        prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=00/'   
+        
+        df = pd.DataFrame(columns=['tweet', 'sentiment', 'sentiment_score','ts'])
+        for obj in my_bucket.objects.filter(Prefix=prefix):    
+            body = obj.get()['Body'].read()
+            string_body = body.decode("utf-8")
+            final_dictionary = eval(string_body)
+            for i in final_dictionary['data']:
+                df = df.append(i, ignore_index=True)
+        df['ts']= pd.to_datetime(df['ts'])
+        df = df.set_index('tweet')
+        #df = df.drop(['clean_tweet'], axis=1)
+        return df
+
+
+    
     if not list_symbols:
         rawData = get_rawData() 
         list_symbols = rawData['symbol'].tolist()
@@ -77,7 +138,7 @@ def app():
             
 
             #MODEL
-
+            st.write('LSTM Model')
             json_file = open('C:/Vivek/PDP/Team5_CSYE7245_Spring2021/Project/model/model.json', 'r')
             loaded_model_json = json_file.read()
             json_file.close()
@@ -137,12 +198,13 @@ def app():
             plt.plot(valid[['Close','Predictions']])
             plt.legend(['Train','Val','Predictions'], loc='lower right')
             #plt.xticks(np.arange(0,4000, 300), df['Date'][0:4000:300])
-            plt.xticks(np.arange(values[0],values[1],50), df['Date'][values[0]:values[1]:50])
+            plt.xticks(np.arange(values[0],values[1],20), df['Date'][values[0]:values[1]:20])
             
             plt.show()
 
 
             st.pyplot()
-    
+            result = get_realtime_tweets(company)
+            st.table(result)
     
    
