@@ -167,8 +167,45 @@ This is an experimental api that logs ML model artifacts and TensorBoard metrics
 The TensorBoard metrics are logged during training of the model. By default, MLflow autologs every 100 steps.
 The ML model artifact creation is handled during the call to `tf.estimator.export_saved_model()`.
 
-* stock_prediction:
+* **stock_prediction.py:** 
 This is the main python file and is used to initiate MLflow run and manages all other python files and functions.
+
+* **load_stock_data.py:**
+This file contains get_stock_data function, which checks if the stock prices data file is present in S3 bucket or not. If it is present, it will download the file, store it in a dataframe and pass that dataframe as input argument to train_model function. If the file is not present, it will download the file using the API and store it in dataframe and pass the dataframe to train the model.
+
+* **train_stock_prediction_model.py:**
+This file is used to call train_model function, which takes dataframe (containing stocks data) as input and trains the LSTM model. Once the LSTM model has been trained, the model and weights will be saved in a json and h5 file and will be stored in S3 bucket.
+
+* **predict_stock_prices.py:**
+This file is used to predict the stock closing prices. It downloads the saved model and the weights from S3 bucket and reload the model. Once the model has ben reloaded, it is used to predict the stock closing prices.
+
+#### Running the code
+To run this code via MLflow, navigate to the cloned directory and run the command
+
+```
+mlflow run .
+```
+
+This will run `stock_prediction.py` with the default parameters `--batch_size=100`. You can see the default values in the `MLproject` file.
+
+In order to run the file with custom parameters, run the command
+
+```
+mlflow run . -P batch_size=X -P train_steps=Y
+```
+
+where `X` and `Y` are your desired values for the parameters.
+
+
+Once the code is finished executing, you can view the run's metrics, parameters, and details by running the command
+
+```
+mlflow ui
+```
+
+and navigating to [http://localhost:5000](http://localhost:5000). This MLflow UI will help you version control the model and helps in tracking each model run.
+
+For more information on MLflow tracking, click [here](https://www.mlflow.org/docs/latest/tracking.html#mlflow-tracking) to view documentation.
 
 
 
