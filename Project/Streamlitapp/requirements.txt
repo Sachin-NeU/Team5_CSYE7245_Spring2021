@@ -1,3 +1,14 @@
 streamlit
 numpy
 pandas
+sklearn
+pandas_datareader
+matplotlib
+datetime
+urllib
+os
+requests
+io
+tensorflow
+sklearn
+boto3
