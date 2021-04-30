@@ -111,8 +111,34 @@ Buffer interval :- 60 sec
 S3 compression and encryption: Disabled
 ```
 
+### Structure of S3 Bucket
 
+S3 Buckets is the main component where we would be storing all the stock data as well as Twitter Data. The structure looks like below
 
+-raw_layer (Raw Data will be stored in this layer)
+ -<Stock1>
+  - <Year>
+   - <Month>
+     -<Day>
+      -<Hour>
+       -<File.txt>
+-optimized_layer (Clean Data will be stored in this layer)
+ -<Stock1>
+  - <Year>
+   - <Month>
+     -<Day>
+      -<Hour>
+       -<File.txt>   
+-business_layer (Final Data will be stored in this layer)
+ -<Stock1>
+  - <Year>
+   - <Month>
+     -<Day>
+      -<Hour>
+       -<File.txt>   
+
+![alt text](https://github.com/catchvivek94/Team5_CSYE7245_Spring2021/blob/main/Project/images/ec2_security.PNG)
+    
 ### Deploying Lambda Functions 
 
 The pipeline extensively uses AWS Lambda Functions for Serverless Computing. All directories on this repo marked with the prefix `lambda-` are Lambda functions that have to be deployed on AWS. All functions follow a common deployment process. 
