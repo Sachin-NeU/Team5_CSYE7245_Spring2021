@@ -33,7 +33,7 @@ Follow instructions below to setup and deploy your own Streamlit Application<br 
 Real time Data Pipeline for ingesting tweets of stocks from Twitter and Finding the Sentiments of the Tweets. Summarization is done using `LSTM` models based on the HuggingFace Pytorch transformers library to run extractive summarizations.
 
 
-#### Architecture 
+## Architecture 
 
 ![alt text](https://github.com/catchvivek94/Team5_CSYE7245_Spring2021/blob/main/Project/images/architecture.jpg)
 
