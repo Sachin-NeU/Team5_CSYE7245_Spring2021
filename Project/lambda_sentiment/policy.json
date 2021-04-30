@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Id": "default",
+  "Statement": [
+    {
+      "Sid": "lambda-379d3ac2-43c8-453b-bbd4-b6a1e516bc92",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": "lambda:InvokeFunction",
+      "Resource": "arn:aws:lambda:us-east-1:019117633315:function:comprehendfinalproject",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceAccount": "019117633315"
+        },
+        "ArnLike": {
+          "AWS:SourceArn": "arn:aws:s3:::stockpriceteam5optimized"
+        }
+      }
+    }
+  ]
+}
