@@ -17,24 +17,21 @@ from tensorflow.keras.models import model_from_json
 
 api_key = 'HN3A9YZW181QU71F'
 
-
+st.set_option('deprecation.showPyplotGlobalUse', False)
 def app():    
-    st.title('Model')
+    st.title('Our Prediction')
     list_symbols = []
+    
+    @st.cache
     def get_rawData():
-        Flag = False
-        if Flag == False:
-            st.set_option('deprecation.showPyplotGlobalUse', False)
+        s3 = boto3.client('s3', 
+                  region_name='us-east-1',
+                  aws_access_key_id='AKIAQI43754RZCTWJJOX', 
+                  aws_secret_access_key='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') 
 
-            url_string = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey="+api_key
-            response = requests.get(url_string)
-            if response.status_code != 200:
-                Flag = False
-            r = response.content
-            rawData = pd.read_csv(io.StringIO(r.decode('utf-8'))) 
-            rawData = rawData[['symbol', 'name']]
-            Flag = True
-        
+        obj = s3.get_object(Bucket= 'lstmmodel', Key= 'listcompanies/listcompanies.csv') 
+
+        rawData = pd.read_csv(obj['Body'])
         return rawData
         
     def get_stock_data(company):
@@ -66,8 +63,14 @@ def app():
         st.write('Please select a company.')
     
     else:
+        companyname = ''
+        if not companyname:
+            companyname = rawData.loc[rawData['symbol'] == company, 'name'].to_string(header=False, index=False)
+            
         if company != 'Select a Company':
-            st.write('The selected company: ' + company)
+        
+            
+            st.write('The selected company: ' + companyname)
             df = get_stock_data(company)
             # Sort DataFrame by date
             df = df.sort_values('Date')
@@ -84,8 +87,8 @@ def app():
             
             #loaded_model.load_weights("C:/Vivek/PDP/Team5_CSYE7245_Spring2021/Project/model/model.h5")
             # Create a new dataframe with only the 'Close column 
-            
             data = df.filter(['Close'])
+            values = st.sidebar.slider('Select a range of values',0, data['Close'].shape[0], (0, (data['Close'].shape[0]-25)))
              
             # Convert the dataframe to a numpy array
             dataset = data.values
@@ -130,10 +133,12 @@ def app():
             plt.title('Model')
             plt.xlabel('Date', fontsize=18)
             plt.ylabel('Close Price USD ($)', fontsize=18)
-            plt.plot(train['Close'])
+            plt.plot(train['Close'][-values[1]:])
             plt.plot(valid[['Close','Predictions']])
             plt.legend(['Train','Val','Predictions'], loc='lower right')
-            plt.xticks(np.arange(0,4000,300), df['Date'][0:4000:300])
+            #plt.xticks(np.arange(0,4000, 300), df['Date'][0:4000:300])
+            plt.xticks(np.arange(values[0],values[1],50), df['Date'][values[0]:values[1]:50])
+            
             plt.show()
 
 

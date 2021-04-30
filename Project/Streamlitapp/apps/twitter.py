@@ -197,7 +197,7 @@ def app():
         
         path = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour='+str(time_hour)+'/'
         
-        prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=19/'   
+        prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=00/'   
         
         df = pd.DataFrame(columns=['tweet', 'sentiment', 'sentiment_score','ts'])
         for obj in my_bucket.objects.filter(Prefix=prefix):    

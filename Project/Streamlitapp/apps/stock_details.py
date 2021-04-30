@@ -11,26 +11,23 @@ import requests
 import io
 import tensorflow as tf 
 from sklearn.preprocessing import MinMaxScaler
+import boto3
 
 api_key = 'HN3A9YZW181QU71F'
 
 def app():
     
     list_symbols = []
+    @st.cache
     def get_rawData():
-        Flag = False
-        if Flag == False:
-            st.set_option('deprecation.showPyplotGlobalUse', False)
+        s3 = boto3.client('s3', 
+                  region_name='us-east-1',
+                  aws_access_key_id='AKIAI33YWGOX7YNTQVSA', 
+                  aws_secret_access_key='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') 
 
-            url_string = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey="+api_key
-            response = requests.get(url_string)
-            if response.status_code != 200:
-                Flag = False
-            r = response.content
-            rawData = pd.read_csv(io.StringIO(r.decode('utf-8'))) 
-            rawData = rawData[['symbol', 'name']]
-            Flag = True
-        
+        obj = s3.get_object(Bucket= 'lstmmodel', Key= 'listcompanies/listcompanies.csv') 
+
+        rawData = pd.read_csv(obj['Body'])
         return rawData
     
     def get_company_overview(company_name):
@@ -64,6 +61,22 @@ def app():
         plt.show()    
         st.pyplot()
         
+        
+    def get_prediction_graphs():
+        url_string = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s"%(company,api_key)
+        with urllib.request.urlopen(url_string) as url:
+            data = json.loads(url.read().decode())
+            # extract stock market data
+            data = data['Time Series (Daily)']
+            df = pd.DataFrame(columns=['Date','Low','High','Close','Open'])
+            for k,v in data.items():
+                date = dt.datetime.strptime(k, '%Y-%m-%d')
+                data_row = [date.date(),float(v['3. low']),float(v['2. high']),
+                            float(v['4. close']),float(v['1. open'])]
+                df.loc[-1,:] = data_row
+                df.index = df.index + 1  
+        
+        df = df.sort_values('Date')
         
         high_prices = df.loc[:,'High'].values
         low_prices = df.loc[:,'Low'].values
@@ -187,6 +200,8 @@ def app():
                 st.write(company_response)
             if encryption == 'Get Graphs':  
                 get_graphs()
+            if encryption == 'Get Predictions':  
+                get_prediction_graphs()
     
     
         
