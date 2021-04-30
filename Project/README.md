@@ -1,4 +1,4 @@
-# CSYE7245 - Real time stock Prediction using Tweets and Historical 
+# CSYE7245 - Real time stock Prediction using Twitter Tweets and Historical Data
 
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
