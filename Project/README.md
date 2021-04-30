@@ -116,9 +116,8 @@ S3 compression and encryption: Disabled
 S3 Buckets is the main component where we would be storing all the stock data as well as Twitter Data. The structure looks like below
   
 ![alt text](https://github.com/catchvivek94/Team5_CSYE7245_Spring2021/blob/main/Project/images/s3_structure.PNG)
-
-
-
+                                                                                                                                                                                                                                                                                                                                                                                                                      
+  
 ![alt text](https://github.com/catchvivek94/Team5_CSYE7245_Spring2021/blob/main/Project/images/s3.PNG)
     
 ### Deploying Lambda Functions 
@@ -132,68 +131,20 @@ All package dependencies are available in the respective `lambda-` directories o
 ```
 pip3 install -r requirements.txt
 ```
-> Place all the libaraies and lambda in a zip File
+
+> Place all the libraries and lambda in a zip File
 
 > Upload Zip file to a S3 Location
 
 > Give path of the S3 location to the Lambda 
 
 
+### Deploying Consumer application on EC2
 
-#### Setup your `config.yaml`
+> git clone https://github.com/catchvivek94/Team5_CSYE7245_Spring2021.git
+> Go to Directory Project/Ingestion_script/
+> run the python file continuosly in the background using command:- nohup producer.py &
 
-All `lambda-` directories contain a `config.yaml` file with the configuration information required to deploy the Lambda package to AWS. Configure the file with your access keys, secret access keys and function name before packaging and deploying the Python code. An example is as follows
-
-```
-region: us-east-1
-
-function_name: Lambda_Function_1
-handler: service.handler
-description: Deployed lambda Function
-runtime: python3.7
-role: <Enter the role name created earlier>
-
-# if access key and secret are left blank, boto will use the credentials
-# defined in the [default] section of ~/.aws/credentials.
-aws_access_key_id: <Enter your Access Keys>
-aws_secret_access_key: <Enter your Secret Access Keys>
-
-timeout: 15
-memory_size: 512
-
-environment_variables:
-    ip_bucket: <enter_your_S3_Bucket>
-
-# Build options
-build:
-  source_directories: lib
-```
-
-> Create a Virtual Environment 
-```
-pipenv shell --python 3.7
-pip3 install python-lambda
-```
-All package dependencies are available in the respective `lambda-` directories on this repository 
-
-> Install all Python dependencies  
-
-```
-pip3 install -r requirements.txt
-```
-> Initiate Lambda Deployement 
-```
-lambda init
-```
-This will create the following files: `event.json`,` __init__.py`, `service.py`, and `config.yaml`
-Replace the created `service.py` and `config.yaml` files with the `service.py` and `config.yaml` files in the respective `lambda-` directory on this repository.
-
-> Package and Deploy Lmabda function
-
-```
-lambda deploy
-```
-This should create a new Lambda function on your AWS Lambda Console. Follow the same steps for all `lambda` directories on this repository to deploy packages to AWS Lambda.
 
 ### Deploying Model Summarization Flask Applications
 
