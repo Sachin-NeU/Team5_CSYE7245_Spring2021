@@ -1,0 +1,14 @@
+streamlit
+numpy
+pandas
+sklearn
+pandas_datareader
+matplotlib
+datetime
+requests
+tensorflow
+sklearn
+boto3
+emoji
+nltk
+spacy
