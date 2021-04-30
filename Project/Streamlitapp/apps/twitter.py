@@ -141,8 +141,8 @@ def app():
 
     def connect_to_aws():
         session = boto3.Session(
-        aws_access_key_id='AKIAQI43754RXAMPRMNJ',
-        aws_secret_access_key='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',
+        #aws_access_key_id='AKIAQI43754RXAMPRMNJ',
+        #aws_secret_access_key='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',
         )
         s3 = session.resource('s3')
         bucket_name = 'edgarpipeline'
