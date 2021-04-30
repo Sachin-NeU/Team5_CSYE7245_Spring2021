@@ -168,7 +168,9 @@ The TensorBoard metrics are logged during training of the model. By default, MLf
 The ML model artifact creation is handled during the call to `tf.estimator.export_saved_model()`.
 
 * stock_prediction:
-This function loads back the model as a generic python function. You can predict on this with a pandas DataFrame input.
+This is the main python file and is used to initiate MLflow run and manages all other python files and functions.
+
+
 
 
 
