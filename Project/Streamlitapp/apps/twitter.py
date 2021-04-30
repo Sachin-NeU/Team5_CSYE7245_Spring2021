@@ -25,7 +25,7 @@ html_temp = """
 <h1><center style= "color:white;">Twitter App</style></center></h1>
 </div>
 """
-st.markdown(html_temp, unsafe_allow_html=True)
+#st.markdown(html_temp, unsafe_allow_html=True)
 st.write('')
 st.markdown(
     """
@@ -154,7 +154,10 @@ def app():
 
     def get_realtime_tweets(company_tweet):
         s3 = boto3.client("s3", 
-                  region_name='us-east-1')
+                  region_name='us-east-1'
+                  #aws_access_key_id='AKIAI33YWGOX7YNTQVSA', 
+                  #aws_secret_access_key='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'
+                  )
 
         resource = boto3.resource('s3')
         today = str(datetime.date.today())
@@ -196,15 +199,16 @@ def app():
         
         prefix = company_tweet+'/year='+str(current_year)+'/month='+str(current_month)+'/day='+str(current_day)+'/hour=19/'   
         
-        df = pd.DataFrame(columns=['tweet', 'clean_tweet', 'sentiment', 'sentiment_score','ts'])
+        df = pd.DataFrame(columns=['tweet', 'sentiment', 'sentiment_score','ts'])
         for obj in my_bucket.objects.filter(Prefix=prefix):    
             body = obj.get()['Body'].read()
             string_body = body.decode("utf-8")
             final_dictionary = eval(string_body)
-            #print(final_dictionary)
             for i in final_dictionary['data']:
                 df = df.append(i, ignore_index=True)
         df['ts']= pd.to_datetime(df['ts'])
+        df = df.set_index('tweet')
+        df = df.drop(['clean_tweet'], axis=1)
         return df
         
         
@@ -231,7 +235,6 @@ def app():
                                   )
         st.write('Sentiments Segregation')
         result = get_realtime_tweets(company_tweet)
-        
         dfinal = pd.DataFrame(columns=['NEGATIVE', 'POSITIVE', 'NEUTRAL'])
         negative = 0
         positive = 0
@@ -249,7 +252,7 @@ def app():
                     'POSITIVE' : positive,
                    'NEUTRAL' : neutral} , 
                     ignore_index=True)
-                    
+        st.button("Re-run")            
         st.table(dfinal)    
         st.table(result)
         

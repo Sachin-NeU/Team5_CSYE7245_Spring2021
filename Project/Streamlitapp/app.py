@@ -1,6 +1,6 @@
 import streamlit as st
 from multiapp import MultiApp
-from apps import home, stock_details,twitter # import your app modules here
+from apps import home, stock_details,twitter,model # import your app modules here
 # HomePage styling
 
 st.write('')
@@ -71,6 +71,6 @@ app = MultiApp()
 app.add_app("Home", home.app)
 app.add_app("Stocks", stock_details.app)
 app.add_app("Twitter", twitter.app)
-
+app.add_app("Model", model.app)
 # The main app
 app.run()
