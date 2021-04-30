@@ -12,9 +12,11 @@ import io
 import tensorflow as tf 
 from sklearn.preprocessing import MinMaxScaler
 import boto3
+import seaborn as sns
 
 api_key = 'HN3A9YZW181QU71F'
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
 def app():
     header_html1 = "<p style='text-align-last:center;font-size: 2rem'>Stocks Analysis</p>"
     st.markdown(
@@ -30,12 +32,14 @@ def app():
 
         rawData = pd.read_csv(obj['Body'])
         return rawData
-    
+
+
     def get_company_overview(company_name):
         overview_url_string = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=%s&apikey=%s"%(company_name,api_key)
         response = requests.get(overview_url_string).json()
         return response
-    
+
+
     def get_graphs():
         url_string = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s"%(company,api_key)
         with urllib.request.urlopen(url_string) as url:
@@ -52,17 +56,64 @@ def app():
         
         df = df.sort_values('Date')
 
-     
-        
+        ## Daily return
+        df1 = df
+
+        df1['Daily Return'] = df['Close'].pct_change()
+
+        plt.figure(figsize=(15, 8))
+
+        # Then we'll plot the daily return percentage
+        df1['Daily Return'].plot(legend=True, linestyle='--', marker='o')
+        plt.xticks(range(0, df1.shape[0], 500), df1['Date'].loc[::500], rotation=45)
+        plt.xlabel('Date', fontsize=18)
+        plt.ylabel('Mid Price', fontsize=18)
+        plt.show()
+        ## Average daily return
+        header_html1 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Daily Return</p>"
+        st.markdown(
+            header_html1, unsafe_allow_html=True,
+        )
+        st.pyplot()
+
+
+        plt.figure(figsize=(15, 8))
+        sns.distplot(df1['Daily Return'].dropna(), bins=100, color='purple')
+        # plt.xticks(range(0, df1.shape[0], 500), df1['Date'].loc[::500], rotation=45)
+        # plt.xlabel('Date', fontsize=18)
+        # plt.ylabel('Mid Price', fontsize=18)
+        # plt.ylabel('Daily Return')
+        plt.title('Average Daily Return')
+        header_html2 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Average Daily Return Distiribution Plot</p>"
+        st.markdown(
+            header_html2, unsafe_allow_html=True,
+        )
+        st.pyplot()
+        ## Autocorrelation with 5 days lag
+
+        plt.figure(figsize=(10, 10))
+        pd.plotting.lag_plot(df['Open'], lag=5)
+
+        header_html3 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Autocorrelation with 5 days lag</p>"
+        st.markdown(
+            header_html3, unsafe_allow_html=True,
+        )
+        st.pyplot()
+
+
         plt.figure(figsize = (15,8))
         plt.plot(range(df.shape[0]),(df['Low']+df['High'])/2.0)
         plt.xticks(range(0,df.shape[0],500),df['Date'].loc[::500],rotation=45)
         plt.xlabel('Date',fontsize=18)
         plt.ylabel('Mid Price',fontsize=18)
-        plt.show()    
+        plt.show()
+        header_html3 = "<p style='text-align-last:center;font-size: 1rem;padding: 10px; border: 1px solid rgba(50, 147, 168, 0.2);background-color:rgba(50, 147, 168, 0.2)'>Median Plot</p>"
+        st.markdown(
+            header_html3, unsafe_allow_html=True,
+        )
         st.pyplot()
-        
-        
+
+    @st.cache
     def get_prediction_graphs():
         url_string = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s"%(company,api_key)
         with urllib.request.urlopen(url_string) as url:

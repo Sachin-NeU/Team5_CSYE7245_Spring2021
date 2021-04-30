@@ -20,6 +20,7 @@ from tensorflow.keras.models import model_from_json
 api_key = 'HN3A9YZW181QU71F'
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
+@st.cache
 def app():
     header_html1 = "<p style='text-align-last:center;font-size: 2rem'>Our Predictions</p>"
     st.markdown(
@@ -36,7 +37,8 @@ def app():
 
         rawData = pd.read_csv(obj['Body'])
         return rawData
-        
+
+    @st.cache
     def get_stock_data(company):
         url_string = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&outputsize=full&apikey=%s"%(company,api_key)
         with urllib.request.urlopen(url_string) as url:
@@ -53,7 +55,8 @@ def app():
             
             df = df.sort_values('Date')
         return df
-    
+
+    @st.cache
     def get_realtime_tweets(company_tweet):
         s3 = boto3.client("s3", 
                   region_name='us-east-1'

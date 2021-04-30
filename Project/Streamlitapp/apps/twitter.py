@@ -88,7 +88,8 @@ canvas{
     unsafe_allow_html=True,
 )
 
-
+st.set_option('deprecation.showPyplotGlobalUse', False)
+@st.cache
 def app():
     header_html1 = "<p style='text-align-last:center;font-size: 2rem'>Twitter Analysis</p>"
     st.markdown(
@@ -100,7 +101,9 @@ def app():
                                   'Get Tweets',
                                   'Get Sentiments'],
                                   index = 0
-                                  )
+                                 )
+
+    @st.cache
     def get_tweets(keyword):
 
         consumer_key = 'f6sxSv3IkOnEyNIwF9Ycayf6i'
@@ -130,7 +133,7 @@ def app():
         
 
         return df
-    
+
     def cleaner(tweet):
         tweet = re.sub("@[A-Za-z0-9]+","",tweet) #Remove @ sign
         tweet = re.sub(r"(?:\@|http?\://|https?\://|www)\S+", "", tweet) #Remove http links
@@ -141,7 +144,7 @@ def app():
              if w.lower() in words or not w.isalpha())
         return tweet
 
-
+    @st.cache
     def connect_to_aws():
         session = boto3.Session()
         s3 = session.resource('s3')
@@ -155,6 +158,7 @@ def app():
         #print (output)
         return output
 
+    @st.cache
     def get_realtime_tweets(company_tweet):
         s3 = boto3.client("s3", 
                   region_name='us-east-1'
