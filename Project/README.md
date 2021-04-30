@@ -30,7 +30,7 @@ Follow instructions below to setup and deploy your own Streamlit Application<br 
 
 ## Introduction
 
-Real time Data Pipeline for ingesting tweets of stocks from Twitter and Finding the Sentiments of the Tweets. Summarization is done using `LSTM` models based on the HuggingFace Pytorch transformers library to run extractive summarizations.
+Real time Data Pipeline for ingesting tweets of stocks from Twitter and finding the Sentiments of the Tweets which can be used for predicting Trend of Stock. Analyzing historical time-series stock prices and returns and predicting the nearby future stock prices using LSTM model.
 
 
 ## Architecture 
@@ -117,23 +117,29 @@ S3 Buckets is the main component where we would be storing all the stock data as
     
 ---
 
+
+
+
+
+
+
+
+
+
+
 ### Building Streamlit Application 
 
-We have used Streamlit Application to interact with all the elements of the pipeline.
+Streamlit Application is used as a Front end for our pipeline.
 
 ### Deploying Streamlit App 
 
-The pipeline uses [Streamlit](https://www.streamlit.io/) for allowing the user to upload a file with URLs, enter a single URL or quicky summarize text and sentiments for a given text input. The app directly interacts with the built components on AWS and provides a GUI to run the pipeline without the need for the end-user to manually login to AWS Account and trigger the pipeline.
-
-The Python code for this app can be found at `streamlit_webapp/app.py`. This app is deployed on the EC2 Instance.
+The Python code for this app can be found at `Streamlitapp/app.py`. This app is deployed on the EC2 Instance.
 
 > Install required libraries
 
 ```
 pip3 install streamlit
 pip3 install boto3
-pip3 install pandas
-pip3 install configparser
 ```
 
 > Run `app.py`
