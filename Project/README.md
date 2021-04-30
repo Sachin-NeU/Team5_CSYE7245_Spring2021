@@ -49,7 +49,6 @@ The pipeline requires an Amazon Web Services account to deploy and run. The pipe
 - Comprehend
 - CloudWatch
 - EC2
-- Simple Notification Servive (SNS)
 - Kinesis Data Streams
 - Kinesis Data Firehose
 
@@ -63,7 +62,6 @@ Signup for an Twitter Developer Account [here](https://developer.twitter.com/en/
 ### Clone
 
 Clone this repo to your local machine using `https://github.com/catchvivek94/Team5_CSYE7245_Spring2021.git`
-![alt text](https://github.com/holladileep/TS-Pipeline/blob/dev/img/CSYE7245_v2-2.png)
 
 
 ### Creating EC2 Instance
