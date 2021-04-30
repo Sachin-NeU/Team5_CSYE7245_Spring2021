@@ -121,12 +121,12 @@ S3 Buckets is the main component where we would be storing all the stock data as
 
 
 - raw_layer (Raw Data will be stored in this layer)
-  -<Stock1>
-    -<Year>
-      -<Month>
-        -<Day>
-          -<Hour>
-            -<File.txt>
+  -<Stock1> 
+    -<Year> 
+      -<Month> 
+        -<Day> 
+          -<Hour> 
+            -<File.txt> 
 -optimized_layer (Clean Data will be stored in this layer)
  -<Stock1>
   - <Year>
