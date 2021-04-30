@@ -157,9 +157,10 @@ def app():
 
     def get_realtime_tweets(company_tweet):
         s3 = boto3.client("s3", 
-                  region_name='us-east-1', 
-                  aws_access_key_id='AKIAI33YWGOX7YNTQVSA', 
-                  aws_secret_access_key='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')
+                  region_name='us-east-1'
+                  #aws_access_key_id='AKIAI33YWGOX7YNTQVSA', 
+                  #aws_secret_access_key='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'
+                  )
 
         resource = boto3.resource('s3')
         today = str(datetime.date.today())
