@@ -114,10 +114,6 @@ S3 compression and encryption: Disabled
 ### Structure of S3 Bucket
 
 S3 Buckets is the main component where we would be storing all the stock data as well as Twitter Data. The structure looks like below
-- Item 1
-  - Item 2
-   - Sub Item 1
-    - Sub Item 2
 
 
 - raw_layer (Raw Data will be stored in this layer)
@@ -141,8 +137,12 @@ S3 Buckets is the main component where we would be storing all the stock data as
      -<Day>
       -<Hour>
        -<File.txt>   
+  
+![alt text](https://github.com/catchvivek94/Team5_CSYE7245_Spring2021/blob/main/Project/images/s3_structure.PNG)
 
-![alt text](https://github.com/catchvivek94/Team5_CSYE7245_Spring2021/blob/main/Project/images/ec2_security.PNG)
+
+
+![alt text](https://github.com/catchvivek94/Team5_CSYE7245_Spring2021/blob/main/Project/images/s3.PNG)
     
 ### Deploying Lambda Functions 
 
